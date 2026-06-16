@@ -67,3 +67,4 @@ vibe_bot/
 ├── .env.example
 └── .gitignore
 ```
+"# vibe_bot" 
