@@ -2,8 +2,8 @@ import os
 import asyncio
 import logging
 from dotenv import load_dotenv
-from telegram import Update, Bot
-from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
+from telegram import Update, Bot, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, CallbackQueryHandler, filters
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from content_generator import generate_post
@@ -37,6 +37,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     premium = await is_premium(user_id)
     status = "⭐ Полный доступ" if premium else "🔓 Бесплатный пробный"
     
+    keyboard = [
+        [InlineKeyboardButton("📚 Текущий урок", callback_data="day")],
+        [InlineKeyboardButton("➡️ Следующий день", callback_data="next")],
+        [InlineKeyboardButton("📊 Мой прогресс", callback_data="progress")],
+        [InlineKeyboardButton("📝 Пост от ИИ", callback_data="post")],
+        [InlineKeyboardButton("🎓 Купить курс", callback_data="buy")],
+        [InlineKeyboardButton("❓ Помощь", callback_data="help")],
+    ]
+    
     welcome_text = (
         "🎓 ВАЙБКОДИНГ ЗА 30 ДНЕЙ\n\n"
         "Научись создавать приложения с помощью ИИ:\n\n"
@@ -46,28 +55,141 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "🚀 Деплой в интернет\n"
         "💰 Монетизация\n\n"
         f"Твой статус: {status}\n\n"
-        "Команды:\n"
-        "/day — урок курса\n"
-        "/day 1 — День 1 (бесплатно)\n"
-        "/next — следующий день\n"
-        "/progress — прогресс\n"
-        "/post — пост от ИИ\n"
-        "/buy — купить подписку ⭐\n"
-        "/stop — отписаться"
+        "Выбери действие:"
     )
     
     img_path = os.path.join("images", "welcome.png")
     if os.path.exists(img_path):
         with open(img_path, "rb") as photo:
-            await update.message.reply_photo(photo=photo, caption=welcome_text)
+            await update.message.reply_photo(
+                photo=photo, 
+                caption=welcome_text,
+                reply_markup=InlineKeyboardMarkup(keyboard)
+            )
     else:
-        await update.message.reply_text(welcome_text)
+        await update.message.reply_text(
+            welcome_text,
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
 
 
 async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     await remove_subscriber(user_id)
     await update.message.reply_text("❌ Ты отписан от рассылки.")
+
+
+async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    
+    user_id = query.from_user.id
+    data = query.data
+    
+    if data == "day":
+        day_num = await get_course_day(user_id)
+        if day_num > 1 and not await is_premium(user_id):
+            await query.edit_message_text(
+                "🔒 Доступ к курсу ограничен\n\n"
+                "День 1 — бесплатный. Чтобы открыть остальные 29 дней, купи подписку:\n\n"
+                "/buy — выбрать подписку\n\n"
+                "⭐ 30-дневный курс — 200 Stars"
+            )
+            return
+        img_path = os.path.join("images", f"day_{day_num}.png")
+        text = format_day(day_num)
+        if os.path.exists(img_path):
+            await query.message.delete()
+            with open(img_path, "rb") as photo:
+                await context.bot.send_photo(
+                    chat_id=user_id,
+                    photo=photo,
+                    caption=text
+                )
+        else:
+            await query.edit_message_text(text)
+    
+    elif data == "next":
+        current = await get_course_day(user_id)
+        if current >= 30:
+            await query.edit_message_text("🎉 Ты уже прошёл весь курс!")
+            return
+        if current >= 1 and not await is_premium(user_id):
+            await query.edit_message_text(
+                "🔒 Следующий день доступен по подписке\n\n"
+                "/buy — купить доступ"
+            )
+            return
+        new_day = await next_course_day(user_id)
+        img_path = os.path.join("images", f"day_{new_day}.png")
+        text = format_day(new_day)
+        if os.path.exists(img_path):
+            await query.message.delete()
+            with open(img_path, "rb") as photo:
+                await context.bot.send_photo(
+                    chat_id=user_id,
+                    photo=photo,
+                    caption=text
+                )
+        else:
+            await query.edit_message_text(text)
+    
+    elif data == "progress":
+        day = await get_course_day(user_id)
+        premium = await is_premium(user_id)
+        pct = int(day / 30 * 100)
+        bar = "█" * (pct // 5) + "░" * (20 - pct // 5)
+        status = "⭐ Подписка активна" if premium else "🔓 Бесплатный доступ"
+        await query.edit_message_text(
+            f"📊 Твой прогресс\n\n"
+            f"Статус: {status}\n"
+            f"День {day}/30\n"
+            f"{bar} {pct}%\n\n"
+            f"Тема: {COURSE_DAYS[day]['title']}"
+        )
+    
+    elif data == "post":
+        await query.edit_message_text("⏳ Генерирую пост...")
+        post = await generate_post()
+        await query.edit_message_text(post)
+    
+    elif data == "buy":
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text="Выбери подписку:"
+        )
+        # Вызываем функцию buy из payments
+        from payments import buy
+        await buy(update, context)
+    
+    elif data == "help":
+        await query.edit_message_text(
+            "❓ ПОМОЩЬ\n\n"
+            "Команды:\n"
+            "/start — главное меню\n"
+            "/day — текущий урок\n"
+            "/day 5 — перейти к дню 5\n"
+            "/next — следующий день\n"
+            "/progress — прогресс\n"
+            "/tutor — ИИ-наставник\n"
+            "/buy — купить подписку\n\n"
+            "Или просто напиши вопрос — отвечу!"
+        )
+    
+    elif data == "menu":
+        keyboard = [
+            [InlineKeyboardButton("📚 Текущий урок", callback_data="day")],
+            [InlineKeyboardButton("➡️ Следующий день", callback_data="next")],
+            [InlineKeyboardButton("📊 Мой прогресс", callback_data="progress")],
+            [InlineKeyboardButton("📝 Пост от ИИ", callback_data="post")],
+            [InlineKeyboardButton("🎓 Купить курс", callback_data="buy")],
+            [InlineKeyboardButton("❓ Помощь", callback_data="help")],
+        ]
+        await query.edit_message_text(
+            "Выбери действие:",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
 
 
 async def manual_post(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -343,6 +465,7 @@ def main():
     app.add_handler(CommandHandler("myid", myid))
     app.add_handler(CommandHandler("agent", run_agent))
     app.add_handler(CommandHandler("tutor", tutor))
+    app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
 
