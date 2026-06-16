@@ -162,6 +162,22 @@ async def daily_growth_task():
     if comments:
         logger.info(f"✅ Generated comments:\n{comments[:200]}...")
 
+    # 4. Автоматически запускаем Growth Hacker
+    try:
+        from agency_agents import run_growth_hacker
+        await run_growth_hacker()
+        logger.info("✅ Growth Hacker completed")
+    except Exception as e:
+        logger.error(f"Growth Hacker error: {e}")
+
+    # 5. Автоматически запускаем Content Creator
+    try:
+        from agency_agents import run_content_creator
+        await run_content_creator()
+        logger.info("✅ Content Creator completed")
+    except Exception as e:
+        logger.error(f"Content Creator error: {e}")
+
     return {
         "post": post,
         "opportunities": opportunities,
