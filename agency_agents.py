@@ -102,21 +102,7 @@ async def run_growth_hacker():
             ],
             max_tokens=1024,
         )
-        result = response.choices[0].message.content
-        
-        # Автоматически публикуем в канал
-        import requests
-        TOKEN = os.getenv("TELEGRAM_TOKEN")
-        CHANNEL_ID = os.getenv("CHANNEL_ID")
-        
-        post = f"🚀 ПЛАН РОСТА НА 30 ДНЕЙ\n\n{result[:1500]}"
-        
-        requests.post(
-            f"https://api.telegram.org/bot{TOKEN}/sendMessage",
-            json={"chat_id": CHANNEL_ID, "text": post}
-        )
-        
-        return result
+        return response.choices[0].message.content
     except Exception as e:
         logger.error(f"Growth Hacker error: {e}")
         return None
@@ -133,21 +119,7 @@ async def run_outbound_strategist():
             ],
             max_tokens=1024,
         )
-        result = response.choices[0].message.content
-        
-        # Автоматически публикуем в канал
-        import requests
-        TOKEN = os.getenv("TELEGRAM_TOKEN")
-        CHANNEL_ID = os.getenv("CHANNEL_ID")
-        
-        post = f"🎯 OUTBOUND-СТРАТЕГИЯ\n\n{result[:1500]}"
-        
-        requests.post(
-            f"https://api.telegram.org/bot{TOKEN}/sendMessage",
-            json={"chat_id": CHANNEL_ID, "text": post}
-        )
-        
-        return result
+        return response.choices[0].message.content
     except Exception as e:
         logger.error(f"Outbound error: {e}")
         return None
@@ -164,22 +136,7 @@ async def run_content_creator():
             ],
             max_tokens=1500,
         )
-        result = response.choices[0].message.content
-        
-        # Автоматически публикуем в канал
-        import requests
-        TOKEN = os.getenv("TELEGRAM_TOKEN")
-        CHANNEL_ID = os.getenv("CHANNEL_ID")
-        
-        posts = result.split("\n\n")
-        for i, post in enumerate(posts[:3]):  # Публикуем первые 3 поста
-            if len(post) > 50:
-                requests.post(
-                    f"https://api.telegram.org/bot{TOKEN}/sendMessage",
-                    json={"chat_id": CHANNEL_ID, "text": post}
-                )
-        
-        return result
+        return response.choices[0].message.content
     except Exception as e:
         logger.error(f"Content error: {e}")
         return None
@@ -196,21 +153,7 @@ async def run_sales_coach():
             ],
             max_tokens=1024,
         )
-        result = response.choices[0].message.content
-        
-        # Автоматически публикуем в канал
-        import requests
-        TOKEN = os.getenv("TELEGRAM_TOKEN")
-        CHANNEL_ID = os.getenv("CHANNEL_ID")
-        
-        post = f"💼 СКРИПТ ПРОДАЖ\n\n{result[:1500]}"
-        
-        requests.post(
-            f"https://api.telegram.org/bot{TOKEN}/sendMessage",
-            json={"chat_id": CHANNEL_ID, "text": post}
-        )
-        
-        return result
+        return response.choices[0].message.content
     except Exception as e:
         logger.error(f"Sales error: {e}")
         return None

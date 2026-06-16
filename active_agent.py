@@ -146,11 +146,10 @@ async def daily_growth_task():
     """Ежедневная задача роста"""
     logger.info("🚀 Running daily growth task...")
 
-    # 1. Генерируем и публикуем пост
+    # 1. Генерируем пост (но НЕ публикуем автоматически)
     post = await generate_promo_post()
     if post:
-        await post_to_channel(post)
-        logger.info("✅ Posted to channel")
+        logger.info("✅ Post generated (not published)")
 
     # 2. Ищем возможности для сотрудничества
     opportunities = await find合作_opportunities()
@@ -161,22 +160,6 @@ async def daily_growth_task():
     comments = await comment_on_posts()
     if comments:
         logger.info(f"✅ Generated comments:\n{comments[:200]}...")
-
-    # 4. Автоматически запускаем Growth Hacker
-    try:
-        from agency_agents import run_growth_hacker
-        await run_growth_hacker()
-        logger.info("✅ Growth Hacker completed")
-    except Exception as e:
-        logger.error(f"Growth Hacker error: {e}")
-
-    # 5. Автоматически запускаем Content Creator
-    try:
-        from agency_agents import run_content_creator
-        await run_content_creator()
-        logger.info("✅ Content Creator completed")
-    except Exception as e:
-        logger.error(f"Content Creator error: {e}")
 
     return {
         "post": post,

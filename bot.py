@@ -588,15 +588,6 @@ async def post_init(application: Application):
         )
         logger.info(f"📅 Задача {job['id']} запланирована на {job['hour']}:{job['minute']:02d}")
 
-    # Автоматический рост - каждый час
-    scheduler.add_job(
-        growth_job,
-        CronTrigger(minute=0),
-        kwargs={"bot": application.bot},
-        id="growth_job",
-    )
-    logger.info("📅 Задача роста запланирована на каждый час")
-
     scheduler.start()
     logger.info("✅ Планировщик запущен")
 
