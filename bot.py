@@ -209,6 +209,12 @@ async def grant_premium(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Неверный ID")
 
 
+async def myid(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    username = update.effective_user.username or "нет"
+    await update.message.reply_text(f"Твой ID: {user_id}\nUsername: @{username}")
+
+
 async def publish_to_channel(bot: Bot, post: str):
     try:
         await bot.send_message(chat_id=CHANNEL_ID, text=post)
@@ -280,6 +286,7 @@ def main():
     app.add_handler(CommandHandler("progress", progress))
     app.add_handler(CommandHandler("menu", course_menu))
     app.add_handler(CommandHandler("grant", grant_premium))
+    app.add_handler(CommandHandler("myid", myid))
     register_payment_handlers(app)
 
     logger.info("🤖 Бот запущен!")
