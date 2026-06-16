@@ -55,3 +55,1570 @@
 2026-06-17 00:50:02,718 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
 2026-06-17 00:50:12,884 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
 2026-06-17 00:50:23,027 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:50:33,197 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:50:43,378 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:50:53,631 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:51:03,809 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:51:13,977 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:51:24,131 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:51:34,281 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:51:44,453 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:51:54,596 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:52:04,729 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:52:14,891 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:52:25,026 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:52:35,159 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:52:45,295 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:52:54,063 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:52:59,158 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:53:09,309 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:53:19,471 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:53:29,989 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:53:40,165 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:53:50,298 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:54:00,421 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:54:10,543 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:54:20,699 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:54:30,850 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:54:40,980 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:54:44,064 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:54:54,263 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:55:04,438 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:55:14,604 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:55:24,793 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:55:34,987 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:55:45,148 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:55:55,318 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:56:05,447 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:56:15,585 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:56:25,714 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:56:35,858 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:56:45,989 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:56:56,115 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:57:06,248 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:57:16,376 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:57:26,501 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:57:36,630 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:57:46,762 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:57:56,916 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:58:07,045 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:58:17,190 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:58:27,323 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:58:37,491 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:58:47,627 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:58:57,764 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:59:07,891 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:59:18,030 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:59:28,179 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:59:38,321 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:59:48,450 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 00:59:58,605 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:00:08,806 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:00:18,995 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:00:29,228 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:00:39,454 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:00:49,646 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:00:59,808 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:01:10,012 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:01:20,157 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:01:30,331 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:01:40,485 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:01:50,619 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:02:00,754 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:02:10,896 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:02:21,033 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:02:31,183 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:02:41,319 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:02:51,456 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:03:01,592 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:03:11,730 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:03:21,883 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:03:32,014 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:03:42,145 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:03:52,285 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:04:02,419 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:04:12,581 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:04:22,721 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:04:32,850 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:04:42,981 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:05:03,001 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:05:06,963 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:05:11,430 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:05:17,042 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:05:23,732 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:05:31,579 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:05:41,974 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:05:56,027 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:06:16,397 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:06:44,499 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:07:17,862 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_async\connection.py", line 156, in _connect
+    stream = await stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_backends\anyio.py", line 67, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 276, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 753, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 747, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_updater.py", line 377, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 649, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 4366, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 623, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\ext\_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\_bot.py", line 652, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 201, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 333, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Сергей Сергеевич\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_httpxrequest.py", line 300, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ConnectError: 
+2026-06-17 01:08:00,487 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:08:11,221 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:08:21,898 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:08:32,692 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:08:43,350 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:08:53,905 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
+2026-06-17 01:09:04,556 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M/getUpdates "HTTP/1.1 200 OK"
