@@ -14,7 +14,7 @@ from course_data import format_day, COURSE_DAYS
 from ai_agent import scheduled_autonomous_job
 import os
 
-ADMIN_IDS = [6928796982]
+ADMIN_IDS = [6928796982, 8639540904]
 PREMIUM_IDS = [8639540904]
 
 load_dotenv()
