@@ -89,17 +89,18 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if data == "day":
         day_num = await get_course_day(user_id)
         if day_num > 1 and not await is_premium(user_id):
-            await query.edit_message_text(
-                "🔒 Доступ к курсу ограничен\n\n"
-                "День 1 — бесплатный. Чтобы открыть остальные 29 дней, купи подписку:\n\n"
-                "/buy — выбрать подписку\n\n"
-                "⭐ 30-дневный курс — 200 Stars"
+            await query.message.delete()
+            await context.bot.send_message(
+                chat_id=user_id,
+                text="🔒 Доступ к курсу ограничен\n\n"
+                     "День 1 — бесплатный. Чтобы открыть остальные 29 дней, купи подписку:\n\n"
+                     "⭐ 30-дневный курс — 200 Stars"
             )
             return
         img_path = os.path.join("images", f"day_{day_num}.png")
         text = format_day(day_num)
+        await query.message.delete()
         if os.path.exists(img_path):
-            await query.message.delete()
             with open(img_path, "rb") as photo:
                 await context.bot.send_photo(
                     chat_id=user_id,
@@ -107,24 +108,26 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     caption=text
                 )
         else:
-            await query.edit_message_text(text)
+            await context.bot.send_message(chat_id=user_id, text=text)
     
     elif data == "next":
         current = await get_course_day(user_id)
         if current >= 30:
-            await query.edit_message_text("🎉 Ты уже прошёл весь курс!")
+            await query.message.delete()
+            await context.bot.send_message(chat_id=user_id, text="🎉 Ты уже прошёл весь курс!")
             return
         if current >= 1 and not await is_premium(user_id):
-            await query.edit_message_text(
-                "🔒 Следующий день доступен по подписке\n\n"
-                "/buy — купить доступ"
+            await query.message.delete()
+            await context.bot.send_message(
+                chat_id=user_id,
+                text="🔒 Следующий день доступен по подписке\n\n⭐ /buy — купить доступ"
             )
             return
         new_day = await next_course_day(user_id)
         img_path = os.path.join("images", f"day_{new_day}.png")
         text = format_day(new_day)
+        await query.message.delete()
         if os.path.exists(img_path):
-            await query.message.delete()
             with open(img_path, "rb") as photo:
                 await context.bot.send_photo(
                     chat_id=user_id,
@@ -132,7 +135,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     caption=text
                 )
         else:
-            await query.edit_message_text(text)
+            await context.bot.send_message(chat_id=user_id, text=text)
     
     elif data == "progress":
         day = await get_course_day(user_id)
@@ -140,41 +143,41 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         pct = int(day / 30 * 100)
         bar = "█" * (pct // 5) + "░" * (20 - pct // 5)
         status = "⭐ Подписка активна" if premium else "🔓 Бесплатный доступ"
-        await query.edit_message_text(
-            f"📊 Твой прогресс\n\n"
-            f"Статус: {status}\n"
-            f"День {day}/30\n"
-            f"{bar} {pct}%\n\n"
-            f"Тема: {COURSE_DAYS[day]['title']}"
-        )
-    
-    elif data == "post":
-        await query.edit_message_text("⏳ Генерирую пост...")
-        post = await generate_post()
-        await query.edit_message_text(post)
-    
-    elif data == "buy":
         await query.message.delete()
         await context.bot.send_message(
             chat_id=user_id,
-            text="Выбери подписку:"
+            text=f"📊 Твой прогресс\n\n"
+                 f"Статус: {status}\n"
+                 f"День {day}/30\n"
+                 f"{bar} {pct}%\n\n"
+                 f"Тема: {COURSE_DAYS[day]['title']}"
         )
-        # Вызываем функцию buy из payments
+    
+    elif data == "post":
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="⏳ Генерирую пост...")
+        post = await generate_post()
+        await context.bot.send_message(chat_id=user_id, text=post)
+    
+    elif data == "buy":
+        await query.message.delete()
         from payments import buy
         await buy(update, context)
     
     elif data == "help":
-        await query.edit_message_text(
-            "❓ ПОМОЩЬ\n\n"
-            "Команды:\n"
-            "/start — главное меню\n"
-            "/day — текущий урок\n"
-            "/day 5 — перейти к дню 5\n"
-            "/next — следующий день\n"
-            "/progress — прогресс\n"
-            "/tutor — ИИ-наставник\n"
-            "/buy — купить подписку\n\n"
-            "Или просто напиши вопрос — отвечу!"
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text="❓ ПОМОЩЬ\n\n"
+                 "Команды:\n"
+                 "/start — главное меню\n"
+                 "/day — текущий урок\n"
+                 "/day 5 — перейти к дню 5\n"
+                 "/next — следующий день\n"
+                 "/progress — прогресс\n"
+                 "/tutor — ИИ-наставник\n"
+                 "/buy — купить подписку\n\n"
+                 "Или просто напиши вопрос — отвечу!"
         )
     
     elif data == "menu":
@@ -186,8 +189,10 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("🎓 Купить курс", callback_data="buy")],
             [InlineKeyboardButton("❓ Помощь", callback_data="help")],
         ]
-        await query.edit_message_text(
-            "Выбери действие:",
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text="Выбери действие:",
             reply_markup=InlineKeyboardMarkup(keyboard)
         )
 
