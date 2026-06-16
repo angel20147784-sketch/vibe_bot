@@ -3,6 +3,7 @@
 
 SCHEDULE = [
     {"id": "morning_post", "hour": 9,  "minute": 0},   # 9:00 утром
+    {"id": "afternoon_post", "hour": 14, "minute": 0}, # 14:00 днём
     {"id": "evening_post", "hour": 19, "minute": 0},   # 19:00 вечером
 ]
 

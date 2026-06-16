@@ -11,6 +11,7 @@ from scheduler_config import SCHEDULE
 from payments import register_payment_handlers
 from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day, add_premium_user
 from course_data import format_day, COURSE_DAYS
+from ai_agent import scheduled_autonomous_job
 import os
 
 ADMIN_IDS = [6928796982]
@@ -216,6 +217,17 @@ async def myid(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"Твой ID: {user_id}\nUsername: @{username}")
 
 
+async def run_agent(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🤖 Запускаю ИИ-агента...")
+    await scheduled_autonomous_job(context.bot)
+    await update.message.reply_text("✅ Агент выполнил публикацию!")
+
+
 async def publish_to_channel(bot: Bot, post: str):
     try:
         await bot.send_message(chat_id=CHANNEL_ID, text=post)
@@ -251,10 +263,11 @@ async def send_to_subscribers(bot: Bot, post: str, premium_post: str):
 async def scheduled_job(bot: Bot):
     logger.info("🕐 Запускаю плановую публикацию...")
 
+    await scheduled_autonomous_job(bot)
+
     post = await generate_post()
     premium = await generate_post(topic="Продвинутые техники вайбкодинга: реальные паттерны из практики с примерами промптов")
 
-    await publish_to_channel(bot, post)
     await send_to_subscribers(bot, post, premium)
 
 
@@ -291,6 +304,7 @@ def main():
     app.add_handler(CommandHandler("menu", course_menu))
     app.add_handler(CommandHandler("grant", grant_premium))
     app.add_handler(CommandHandler("myid", myid))
+    app.add_handler(CommandHandler("agent", run_agent))
     register_payment_handlers(app)
 
     logger.info("🤖 Бот запущен!")
