@@ -14,6 +14,7 @@ from course_data import format_day, COURSE_DAYS
 import os
 
 ADMIN_IDS = [6928796982]
+PREMIUM_IDS = [8639540904]
 
 load_dotenv()
 
@@ -259,6 +260,9 @@ async def scheduled_job(bot: Bot):
 
 async def post_init(application: Application):
     await init_db()
+    for uid in PREMIUM_IDS:
+        await add_premium_user(uid)
+        logger.info(f"✅ Premium granted to {uid}")
 
     scheduler = AsyncIOScheduler()
     for job in SCHEDULE:
