@@ -110,14 +110,17 @@ async def successful_payment(update: Update, context: ContextTypes.DEFAULT_TYPE)
     await add_premium_user(user_id)
     logger.info(f"💰 Новый премиум-пользователь: {user_id} ({user_name}), {plan_name}, {payment.total_amount} Stars")
 
+    from ai_tutor import get_onboarding_text
+    onboarding = get_onboarding_text(1)
+
     await update.message.reply_text(
         f"🎉 Оплата прошла успешно, {user_name}!\n\n"
         f"📦 Ты купил: {plan_name}\n\n"
-        "🔓 Тебе доступны все 30 дней курса!\n\n"
-        "Команды:\n"
+        f"{onboarding}\n\n"
+        "Доступные команды:\n"
         "/day — текущий урок\n"
-        "/day 5 — перейти к уроку 5\n"
         "/next — следующий день\n"
+        "/tutor — ИИ-наставник\n"
         "/progress — прогресс"
     )
 

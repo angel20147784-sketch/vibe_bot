@@ -3,7 +3,7 @@ import asyncio
 import logging
 from dotenv import load_dotenv
 from telegram import Update, Bot
-from telegram.ext import Application, CommandHandler, ContextTypes
+from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from content_generator import generate_post
@@ -12,6 +12,7 @@ from payments import register_payment_handlers
 from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day, add_premium_user
 from course_data import format_day, COURSE_DAYS
 from ai_agent import scheduled_autonomous_job
+from ai_tutor import ask_tutor, get_onboarding_text
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -228,6 +229,35 @@ async def run_agent(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("✅ Агент выполнил публикацию!")
 
 
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    text = update.message.text
+
+    if not await is_premium(user_id):
+        return
+
+    day = await get_course_day(user_id)
+    await update.message.reply_text("🤔 Думаю над ответом...")
+
+    answer = await ask_tutor(text, current_day=day)
+    await update.message.reply_text(answer)
+
+
+async def tutor(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+
+    if not await is_premium(user_id):
+        await update.message.reply_text(
+            "🔒 ИИ-наставник доступен только по подписке\n\n"
+            "/buy — купить доступ"
+        )
+        return
+
+    day = await get_course_day(user_id)
+    onboarding = get_onboarding_text(day)
+    await update.message.reply_text(onboarding)
+
+
 async def publish_to_channel(bot: Bot, post: str):
     try:
         await bot.send_message(chat_id=CHANNEL_ID, text=post)
@@ -305,6 +335,8 @@ def main():
     app.add_handler(CommandHandler("grant", grant_premium))
     app.add_handler(CommandHandler("myid", myid))
     app.add_handler(CommandHandler("agent", run_agent))
+    app.add_handler(CommandHandler("tutor", tutor))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
 
     logger.info("🤖 Бот запущен!")
