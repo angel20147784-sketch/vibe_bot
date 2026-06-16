@@ -114,7 +114,7 @@ async def comment_on_posts():
         return None
 
 
-async def find合作 Opportunities():
+async def find合作_opportunities():
     """Ищет каналы для сотрудничества"""
     client = get_client()
 
@@ -153,7 +153,7 @@ async def daily_growth_task():
         logger.info("✅ Posted to channel")
 
     # 2. Ищем возможности для сотрудничества
-    opportunities = await find合作 Opportunities()
+    opportunities = await find合作_opportunities()
     if opportunities:
         logger.info(f"✅ Found opportunities:\n{opportunities[:200]}...")
 

@@ -14,7 +14,7 @@ from course_data import format_day, COURSE_DAYS
 from ai_agent import scheduled_autonomous_job
 from ai_tutor import ask_tutor, get_onboarding_text
 from subscriber_agent import analyze_audience, find_similar_channels, create_promo_texts, growth_strategy
-from active_agent import daily_growth_task, generate_promo_post, find合作 Opportunities, comment_on_posts
+from active_agent import daily_growth_task, generate_promo_post, find合作_opportunities, comment_on_posts
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
