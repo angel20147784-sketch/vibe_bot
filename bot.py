@@ -15,6 +15,7 @@ from ai_agent import scheduled_autonomous_job
 from ai_tutor import ask_tutor, get_onboarding_text
 from subscriber_agent import analyze_audience, find_similar_channels, create_promo_texts, growth_strategy
 from active_agent import daily_growth_task, generate_promo_post, find合作_opportunities, comment_on_posts
+from agency_agents import run_growth_hacker, run_outbound_strategist, run_content_creator, run_sales_coach
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -450,6 +451,50 @@ async def auto_post_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Ошибка генерации")
 
 
+async def growth_hacker_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🚀 Growth Hacker анализирует...")
+    result = await run_growth_hacker()
+    await update.message.reply_text(result or "Ошибка")
+
+
+async def outbound_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🎯 Outbound Strategist работает...")
+    result = await run_outbound_strategist()
+    await update.message.reply_text(result or "Ошибка")
+
+
+async def content_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("📝 Content Creator создаёт...")
+    result = await run_content_creator()
+    await update.message.reply_text(result or "Ошибка")
+
+
+async def sales_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("💼 Sales Coach готовит...")
+    result = await run_sales_coach()
+    await update.message.reply_text(result or "Ошибка")
+
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     text = update.message.text
@@ -577,6 +622,10 @@ def main():
     app.add_handler(CommandHandler("growth", growth_cmd))
     app.add_handler(CommandHandler("grow", grow_cmd))
     app.add_handler(CommandHandler("autopost", auto_post_cmd))
+    app.add_handler(CommandHandler("growthhacker", growth_hacker_cmd))
+    app.add_handler(CommandHandler("outbound", outbound_cmd))
+    app.add_handler(CommandHandler("content", content_cmd))
+    app.add_handler(CommandHandler("sales", sales_cmd))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
