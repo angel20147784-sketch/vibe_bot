@@ -14,6 +14,7 @@ from course_data import format_day, COURSE_DAYS
 from ai_agent import scheduled_autonomous_job
 from ai_tutor import ask_tutor, get_onboarding_text
 from subscriber_agent import analyze_audience, find_similar_channels, create_promo_texts, growth_strategy
+from active_agent import daily_growth_task, generate_promo_post, find合作 Opportunities, comment_on_posts
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -408,6 +409,47 @@ async def growth_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(result or "Ошибка при составлении стратегии")
 
 
+async def grow_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🚀 Запускаю рост...")
+    result = await daily_growth_task()
+
+    text = "✅ Задача роста выполнена!\n\n"
+
+    if result.get("post"):
+        text += f"📝 Опубликовано:\n{result['post'][:200]}...\n\n"
+
+    if result.get("opportunities"):
+        text += f"🤝 Сотрудничество:\n{result['opportunities'][:200]}...\n\n"
+
+    if result.get("comments"):
+        text += f"💬 Комментарии:\n{result['comments'][:200]}..."
+
+    await update.message.reply_text(text)
+
+
+async def auto_post_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("📝 Генерирую пост...")
+    post = await generate_promo_post()
+    if post:
+        success = await post_to_channel(post)
+        if success:
+            await update.message.reply_text(f"✅ Пост опубликован!\n\n{post}")
+        else:
+            await update.message.reply_text("❌ Ошибка публикации")
+    else:
+        await update.message.reply_text("❌ Ошибка генерации")
+
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     text = update.message.text
@@ -480,6 +522,11 @@ async def scheduled_job(bot: Bot):
     await send_to_subscribers(bot, post, premium)
 
 
+async def growth_job(bot: Bot):
+    logger.info("🚀 Запускаю задачу роста...")
+    await daily_growth_task()
+
+
 async def post_init(application: Application):
     await init_db()
     for uid in PREMIUM_IDS:
@@ -495,6 +542,15 @@ async def post_init(application: Application):
             id=job["id"],
         )
         logger.info(f"📅 Задача {job['id']} запланирована на {job['hour']}:{job['minute']:02d}")
+
+    # Автоматический рост - каждый час
+    scheduler.add_job(
+        growth_job,
+        CronTrigger(minute=0),
+        kwargs={"bot": application.bot},
+        id="growth_job",
+    )
+    logger.info("📅 Задача роста запланирована на каждый час")
 
     scheduler.start()
     logger.info("✅ Планировщик запущен")
@@ -519,6 +575,8 @@ def main():
     app.add_handler(CommandHandler("channels", channels_cmd))
     app.add_handler(CommandHandler("promo", promo_cmd))
     app.add_handler(CommandHandler("growth", growth_cmd))
+    app.add_handler(CommandHandler("grow", grow_cmd))
+    app.add_handler(CommandHandler("autopost", auto_post_cmd))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
