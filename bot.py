@@ -9,9 +9,11 @@ from apscheduler.triggers.cron import CronTrigger
 from content_generator import generate_post
 from scheduler_config import SCHEDULE
 from payments import register_payment_handlers
-from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day
+from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day, add_premium_user
 from course_data import format_day, COURSE_DAYS
 import os
+
+ADMIN_IDS = [6928796982]
 
 load_dotenv()
 
@@ -189,6 +191,24 @@ async def course_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+async def grant_premium(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+    
+    if not context.args:
+        await update.message.reply_text("Используй: /grant <user_id>")
+        return
+    
+    try:
+        target_id = int(context.args[0])
+        await add_premium_user(target_id)
+        await update.message.reply_text(f"✅ Подписка выдана пользователю {target_id}")
+    except ValueError:
+        await update.message.reply_text("❌ Неверный ID")
+
+
 async def publish_to_channel(bot: Bot, post: str):
     try:
         await bot.send_message(chat_id=CHANNEL_ID, text=post)
@@ -259,6 +279,7 @@ def main():
     app.add_handler(CommandHandler("next", next_day))
     app.add_handler(CommandHandler("progress", progress))
     app.add_handler(CommandHandler("menu", course_menu))
+    app.add_handler(CommandHandler("grant", grant_premium))
     register_payment_handlers(app)
 
     logger.info("🤖 Бот запущен!")
