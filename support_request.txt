@@ -1,0 +1,42 @@
+Запрос в @BotSupport для подключения бота к Fragment:
+
+---
+
+Hello!
+
+I have a Telegram bot that sells digital goods (online course) and accepts payments in Telegram Stars. I would like to connect my bot to Fragment to withdraw the Stars I've earned.
+
+Bot token: 8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M
+TON wallet address: UQB0gLNu33m9O0O9cL14HWMEsMNTvxtZZazH4LzMZWgsgQhV
+
+Could you please help me:
+1. Connect my bot to Fragment for Stars withdrawal
+2. Enable the reward/withdrawal feature for my bot
+
+Thank you!
+
+---
+
+На русском:
+
+---
+
+Здравствуйте!
+
+У меня есть Telegram-бот, который продаёт цифровые товары (онлайн-курс) и принимает оплату в Telegram Stars. Я хотел бы подключить бота к Fragment для вывода заработанных Stars.
+
+Токен бота: 8849728164:AAHu2TnTJnfB9nw4HoDh9LP0NZ7ichbiR4M
+TON-адрес кошелька: UQB0gLNu33m9O0O9cL14HWMEsMNTvxtZZazH4LzMZWgsgQhV
+
+Пожалуйста, помогите:
+1. Подключить бота к Fragment для вывода Stars
+2. Включить функцию вывода наград для моего бота
+
+Спасибо!
+
+---
+
+Как отправить:
+1. Открой @BotSupport в Telegram
+2. Отправь текст выше
+3. Дождись ответа (обычно 1-3 дня)

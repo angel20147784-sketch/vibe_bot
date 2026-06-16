@@ -37,7 +37,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     premium = await is_premium(user_id)
     status = "⭐ Полный доступ" if premium else "🔓 Бесплатный пробный"
     
-    await update.message.reply_text(
+    welcome_text = (
         "🎓 ВАЙБКОДИНГ ЗА 30 ДНЕЙ\n\n"
         "Научись создавать приложения с помощью ИИ:\n\n"
         "📝 Промпт-инжиниринг\n"
@@ -55,6 +55,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/buy — купить подписку ⭐\n"
         "/stop — отписаться"
     )
+    
+    img_path = os.path.join("images", "welcome.png")
+    if os.path.exists(img_path):
+        with open(img_path, "rb") as photo:
+            await update.message.reply_photo(photo=photo, caption=welcome_text)
+    else:
+        await update.message.reply_text(welcome_text)
 
 
 async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
