@@ -13,6 +13,7 @@ from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, 
 from course_data import format_day, COURSE_DAYS
 from ai_agent import scheduled_autonomous_job
 from ai_tutor import ask_tutor, get_onboarding_text
+from subscriber_agent import analyze_audience, find_similar_channels, create_promo_texts, growth_strategy
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -363,6 +364,50 @@ async def run_agent(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("✅ Агент выполнил публикацию!")
 
 
+async def analyze_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🔍 Анализирую аудиторию...")
+    result = await analyze_audience()
+    await update.message.reply_text(result or "Ошибка при анализе")
+
+
+async def channels_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🔍 Ищу похожие каналы...")
+    result = await find_similar_channels()
+    await update.message.reply_text(result or "Ошибка при поиске")
+
+
+async def promo_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("📝 Генерирую тексты...")
+    result = await create_promo_texts()
+    await update.message.reply_text(result or "Ошибка при генерации")
+
+
+async def growth_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("📊 Составляю стратегию роста...")
+    result = await growth_strategy()
+    await update.message.reply_text(result or "Ошибка при составлении стратегии")
+
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     text = update.message.text
@@ -470,6 +515,10 @@ def main():
     app.add_handler(CommandHandler("myid", myid))
     app.add_handler(CommandHandler("agent", run_agent))
     app.add_handler(CommandHandler("tutor", tutor))
+    app.add_handler(CommandHandler("analyze", analyze_cmd))
+    app.add_handler(CommandHandler("channels", channels_cmd))
+    app.add_handler(CommandHandler("promo", promo_cmd))
+    app.add_handler(CommandHandler("growth", growth_cmd))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
