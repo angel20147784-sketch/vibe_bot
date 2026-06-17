@@ -321,12 +321,19 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(chat_id=user_id, text="📝 Генерирую пост...")
         post = await generate_promo_post()
         if post:
-            success = await post_to_channel(post)
-            if success:
-                await add_post(post)
-                await context.bot.send_message(chat_id=user_id, text=f"✅ Опубликовано!\n\n{post}")
-            else:
-                await context.bot.send_message(chat_id=user_id, text="❌ Ошибка публикации")
+            keyboard = [
+                [InlineKeyboardButton("✅ Опубликовать", callback_data=f"confirm_post_{hash(post) % 100000}")],
+                [InlineKeyboardButton("❌ Отмена", callback_data="admin_back")],
+            ]
+            # Сохраняем пост во временное хранилище
+            context.user_data["pending_post"] = post
+            await context.bot.send_message(
+                chat_id=user_id,
+                text=f"📝 ПРЕДПРОСМОТР ПОСТА:\n\n{truncate_message(post)}\n\nОпубликовать в канал?",
+                reply_markup=InlineKeyboardMarkup(keyboard)
+            )
+        else:
+            await context.bot.send_message(chat_id=user_id, text="❌ Ошибка генерации")
     
     elif data == "admin_all_posts":
         if user_id not in ADMIN_IDS:
@@ -413,6 +420,22 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             info = get_skill_info(skill_key)
             await query.message.delete()
             await context.bot.send_message(chat_id=user_id, text=info)
+    
+    elif data.startswith("confirm_post_"):
+        if user_id not in ADMIN_IDS:
+            return
+        post = context.user_data.get("pending_post")
+        if post:
+            await query.message.delete()
+            success = await post_to_channel(post)
+            if success:
+                await add_post(post)
+                context.user_data["pending_post"] = None
+                await context.bot.send_message(chat_id=user_id, text="✅ Пост опубликован в канал!")
+            else:
+                await context.bot.send_message(chat_id=user_id, text="❌ Ошибка публикации")
+        else:
+            await context.bot.send_message(chat_id=user_id, text="❌ Пост не найден. Сгенерируй заново.")
     
     elif data == "admin_back":
         if user_id not in ADMIN_IDS:
