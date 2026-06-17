@@ -23,6 +23,16 @@ import os
 ADMIN_IDS = [6928796982, 8639540904]
 PREMIUM_IDS = [8639540904]
 
+# Максимальная длина сообщения Telegram
+MAX_MESSAGE_LENGTH = 4000
+
+
+def truncate_message(text: str, max_length: int = MAX_MESSAGE_LENGTH) -> str:
+    """Обрезает сообщение если оно слишком длинное"""
+    if len(text) <= max_length:
+        return text
+    return text[:max_length] + "\n\n... (сообщение обрезано)"
+
 
 def is_private_chat(update: Update) -> bool:
     return update.effective_chat.type == "private"
@@ -235,7 +245,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.delete()
         await context.bot.send_message(chat_id=user_id, text="⏳ Генерирую пост...")
         post = await generate_post()
-        await context.bot.send_message(chat_id=user_id, text=post)
+        await context.bot.send_message(chat_id=user_id, text=truncate_message(post))
     
     elif data == "buy":
         await query.message.delete()
@@ -431,7 +441,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.delete()
         await context.bot.send_message(chat_id=user_id, text="🚀 Growth Hacker...")
         result = await run_growth_hacker()
-        await context.bot.send_message(chat_id=user_id, text=result or "Ошибка")
+        await context.bot.send_message(chat_id=user_id, text=truncate_message(result or "Ошибка"))
     
     elif data == "admin_outbound":
         if user_id not in ADMIN_IDS:
@@ -439,7 +449,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.delete()
         await context.bot.send_message(chat_id=user_id, text="🎯 Outbound...")
         result = await run_outbound_strategist()
-        await context.bot.send_message(chat_id=user_id, text=result or "Ошибка")
+        await context.bot.send_message(chat_id=user_id, text=truncate_message(result or "Ошибка"))
     
     elif data == "admin_content":
         if user_id not in ADMIN_IDS:
@@ -447,7 +457,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.delete()
         await context.bot.send_message(chat_id=user_id, text="📝 Контент...")
         result = await run_content_creator()
-        await context.bot.send_message(chat_id=user_id, text=result or "Ошибка")
+        await context.bot.send_message(chat_id=user_id, text=truncate_message(result or "Ошибка"))
     
     elif data == "admin_sales":
         if user_id not in ADMIN_IDS:
@@ -455,7 +465,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.delete()
         await context.bot.send_message(chat_id=user_id, text="💼 Продажи...")
         result = await run_sales_coach()
-        await context.bot.send_message(chat_id=user_id, text=result or "Ошибка")
+        await context.bot.send_message(chat_id=user_id, text=truncate_message(result or "Ошибка"))
     
     elif data == "admin_add":
         if user_id not in ADMIN_IDS:
@@ -661,7 +671,7 @@ async def analyze_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("🔍 Анализирую аудиторию...")
     result = await analyze_audience()
-    await update.message.reply_text(result or "Ошибка при анализе")
+    await update.message.reply_text(truncate_message(result or "Ошибка при анализе"))
 
 
 async def channels_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -674,7 +684,7 @@ async def channels_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("🔍 Ищу похожие каналы...")
     result = await find_similar_channels()
-    await update.message.reply_text(result or "Ошибка при поиске")
+    await update.message.reply_text(truncate_message(result or "Ошибка при поиске"))
 
 
 async def promo_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -687,7 +697,7 @@ async def promo_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("📝 Генерирую тексты...")
     result = await create_promo_texts()
-    await update.message.reply_text(result or "Ошибка при генерации")
+    await update.message.reply_text(truncate_message(result or "Ошибка при генерации"))
 
 
 async def growth_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -700,7 +710,7 @@ async def growth_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("📊 Составляю стратегию роста...")
     result = await growth_strategy()
-    await update.message.reply_text(result or "Ошибка при составлении стратегии")
+    await update.message.reply_text(truncate_message(result or "Ошибка при составлении стратегии"))
 
 
 async def grow_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -758,7 +768,7 @@ async def growth_hacker_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("🚀 Growth Hacker анализирует...")
     result = await run_growth_hacker()
-    await update.message.reply_text(result or "Ошибка")
+    await update.message.reply_text(truncate_message(result or "Ошибка"))
 
 
 async def outbound_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -771,7 +781,7 @@ async def outbound_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("🎯 Outbound Strategist работает...")
     result = await run_outbound_strategist()
-    await update.message.reply_text(result or "Ошибка")
+    await update.message.reply_text(truncate_message(result or "Ошибка"))
 
 
 async def content_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -784,7 +794,7 @@ async def content_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("📝 Content Creator создаёт...")
     result = await run_content_creator()
-    await update.message.reply_text(result or "Ошибка")
+    await update.message.reply_text(truncate_message(result or "Ошибка"))
 
 
 async def sales_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -797,7 +807,7 @@ async def sales_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("💼 Sales Coach готовит...")
     result = await run_sales_coach()
-    await update.message.reply_text(result or "Ошибка")
+    await update.message.reply_text(truncate_message(result or "Ошибка"))
 
 
 async def add_users_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1039,7 +1049,7 @@ async def growth_hacker_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("🚀 Growth Hacker анализирует...")
     result = await run_growth_hacker()
-    await update.message.reply_text(result or "Ошибка")
+    await update.message.reply_text(truncate_message(result or "Ошибка"))
 
 
 async def outbound_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1050,7 +1060,7 @@ async def outbound_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("🎯 Outbound Strategist работает...")
     result = await run_outbound_strategist()
-    await update.message.reply_text(result or "Ошибка")
+    await update.message.reply_text(truncate_message(result or "Ошибка"))
 
 
 async def content_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1061,7 +1071,7 @@ async def content_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("📝 Content Creator создаёт...")
     result = await run_content_creator()
-    await update.message.reply_text(result or "Ошибка")
+    await update.message.reply_text(truncate_message(result or "Ошибка"))
 
 
 async def sales_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1072,7 +1082,7 @@ async def sales_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("💼 Sales Coach готовит...")
     result = await run_sales_coach()
-    await update.message.reply_text(result or "Ошибка")
+    await update.message.reply_text(truncate_message(result or "Ошибка"))
 
 
 async def add_users_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1228,7 +1238,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data["waiting_for_1c_question"] = False
         await update.message.reply_text("🤔 Думаю над ответом по 1С...")
         answer = await ask_1c(text)
-        await update.message.reply_text(answer)
+        await update.message.reply_text(truncate_message(answer))
         return
 
     if not await is_premium(user_id):
@@ -1238,7 +1248,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("🤔 Думаю над ответом...")
 
     answer = await ask_tutor(text, current_day=day)
-    await update.message.reply_text(answer)
+    await update.message.reply_text(truncate_message(answer))
 
 
 async def tutor(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1362,6 +1372,20 @@ def main():
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
+
+    # Обработчики ошибок
+    async def error_handler(update, context):
+        logger.error(f"Exception while handling an update: {context.error}")
+        if update and update.effective_chat:
+            try:
+                await context.bot.send_message(
+                    chat_id=update.effective_chat.id,
+                    text="❌ Произошла ошибка. Попробуй ещё раз."
+                )
+            except:
+                pass
+
+    app.add_error_handler(error_handler)
 
     logger.info("🤖 Бот запущен!")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
