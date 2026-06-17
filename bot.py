@@ -17,6 +17,7 @@ from subscriber_agent import analyze_audience, find_similar_channels, create_pro
 from active_agent import daily_growth_task, generate_promo_post, find合作_opportunities, comment_on_posts
 from agency_agents import run_growth_hacker, run_outbound_strategist, run_content_creator, run_sales_coach
 from self_evolving_agent import run_evolution, EVOLVING_PROMPTS
+from onec_agent import ask_1c, get_skills_list, get_skill_info, SKILLS_INFO
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -388,6 +389,20 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         await query.message.delete()
         await context.bot.send_message(chat_id=user_id, text=f"🗑 Пост #{post_id} удалён!")
+    
+    elif data.startswith("onec_"):
+        skill_key = data.replace("onec_", "")
+        if skill_key == "ask":
+            context.user_data["waiting_for_1c_question"] = True
+            await query.message.delete()
+            await context.bot.send_message(
+                chat_id=user_id,
+                text="❓ Задай вопрос по 1С:Предприятие:"
+            )
+        else:
+            info = get_skill_info(skill_key)
+            await query.message.delete()
+            await context.bot.send_message(chat_id=user_id, text=info)
     
     elif data == "admin_back":
         if user_id not in ADMIN_IDS:
@@ -935,11 +950,39 @@ async def providers_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = "🔌 СТАТУС API ПРОВАЙДЕРОВ:\n\n"
     for p in status:
         emoji = "✅" if p["available"] else "❌"
-        active = " (АКТИВЕН)" if p["active"] else ""
-        text += f"{emoji} {p['name']}{active}\n"
+        cooldown = f" (кулдаун {p['cooldown_left']}с)" if p["in_cooldown"] else ""
+        text += f"{emoji} {p['name']}{cooldown}\n"
         text += f"   Ошибок: {p['errors']}\n\n"
     
     await update.message.reply_text(text)
+
+
+async def onec_skills_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    
+    keyboard = []
+    for key, skill in SKILLS_INFO.items():
+        keyboard.append([InlineKeyboardButton(f"📦 {skill['name']}", callback_data=f"onec_{key}")])
+    keyboard.append([InlineKeyboardButton("❓ Вопрос по 1С", callback_data="onec_ask")])
+    
+    await update.message.reply_text(
+        "📦 НАВЫКИ 1С ДЛЯ ИИ\n\n"
+        "Выбери категорию или задай вопрос:",
+        reply_markup=InlineKeyboardMarkup(keyboard)
+    )
+
+
+async def onec_ask_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    context.user_data["waiting_for_1c_question"] = True
+    
+    await update.message.reply_text(
+        "❓ Задай вопрос по 1С:Предприятие\n\n"
+        "Примеры:\n"
+        "- Как создать внешнюю обработку?\n"
+        "- Что такое управляемые формы?\n"
+        "- Как подключить ИИ к 1С?"
+    )
 
 
 async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1167,7 +1210,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update_post(post_id, text)
             await update.message.reply_text(f"✅ Пост #{post_id} обновлён!")
             
-            # Показываем обновлённый пост
             post = await get_post(post_id)
             if post:
                 keyboard = [
@@ -1180,6 +1222,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     reply_markup=InlineKeyboardMarkup(keyboard)
                 )
             return
+
+    # Проверяем, не вопрос ли по 1С
+    if context.user_data.get("waiting_for_1c_question"):
+        context.user_data["waiting_for_1c_question"] = False
+        await update.message.reply_text("🤔 Думаю над ответом по 1С...")
+        answer = await ask_1c(text)
+        await update.message.reply_text(answer)
+        return
 
     if not await is_premium(user_id):
         return
@@ -1307,6 +1357,8 @@ def main():
     app.add_handler(CommandHandler("evolve", evolve_cmd))
     app.add_handler(CommandHandler("prompts", prompts_cmd))
     app.add_handler(CommandHandler("providers", providers_cmd))
+    app.add_handler(CommandHandler("1c", onec_skills_cmd))
+    app.add_handler(CommandHandler("1cask", onec_ask_cmd))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
