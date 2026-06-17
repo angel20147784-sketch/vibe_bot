@@ -80,13 +80,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logger.info(f"Referral: {referrer_id} invited {user_id}")
     
     keyboard = [
-        [InlineKeyboardButton("📚 Текущий урок", callback_data="day")],
-        [InlineKeyboardButton("➡️ Следующий день", callback_data="next")],
-        [InlineKeyboardButton("📊 Мой прогресс", callback_data="progress")],
-        [InlineKeyboardButton("📝 Пост от ИИ", callback_data="post")],
-        [InlineKeyboardButton("🎓 Купить курс", callback_data="buy")],
-        [InlineKeyboardButton("📢 Поделиться с другом", callback_data="share")],
-        [InlineKeyboardButton("❓ Помощь", callback_data="help")],
+        [
+            InlineKeyboardButton("📚 Урок", callback_data="day"),
+            InlineKeyboardButton("➡️ Далее", callback_data="next"),
+            InlineKeyboardButton("📊 Прогресс", callback_data="progress"),
+        ],
+        [
+            InlineKeyboardButton("📝 Пост", callback_data="post"),
+            InlineKeyboardButton("🎓 Купить", callback_data="buy"),
+            InlineKeyboardButton("📢 Другу", callback_data="share"),
+        ],
+        [
+            InlineKeyboardButton("❓ Помощь", callback_data="help"),
+        ],
     ]
     
     welcome_text = (
@@ -280,13 +286,19 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     elif data == "menu":
         keyboard = [
-            [InlineKeyboardButton("📚 Текущий урок", callback_data="day")],
-            [InlineKeyboardButton("➡️ Следующий день", callback_data="next")],
-            [InlineKeyboardButton("📊 Мой прогресс", callback_data="progress")],
-            [InlineKeyboardButton("📝 Пост от ИИ", callback_data="post")],
-            [InlineKeyboardButton("🎓 Купить курс", callback_data="buy")],
-            [InlineKeyboardButton("📢 Поделиться с другом", callback_data="share")],
-            [InlineKeyboardButton("❓ Помощь", callback_data="help")],
+            [
+                InlineKeyboardButton("📚 Урок", callback_data="day"),
+                InlineKeyboardButton("➡️ Далее", callback_data="next"),
+                InlineKeyboardButton("📊 Прогресс", callback_data="progress"),
+            ],
+            [
+                InlineKeyboardButton("📝 Пост", callback_data="post"),
+                InlineKeyboardButton("🎓 Купить", callback_data="buy"),
+                InlineKeyboardButton("📢 Другу", callback_data="share"),
+            ],
+            [
+                InlineKeyboardButton("❓ Помощь", callback_data="help"),
+            ],
         ]
         await query.message.delete()
         await context.bot.send_message(
@@ -509,17 +521,25 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if user_id not in ADMIN_IDS:
             return
         keyboard = [
-            [InlineKeyboardButton("📊 Статистика", callback_data="admin_stats")],
-            [InlineKeyboardButton("👥 База пользователей", callback_data="admin_users")],
-            [InlineKeyboardButton("📢 Рассылка", callback_data="admin_broadcast")],
-            [InlineKeyboardButton("📝 Опубликовать пост", callback_data="admin_post")],
-            [InlineKeyboardButton("📋 Все посты", callback_data="admin_all_posts")],
-            [InlineKeyboardButton("🧬 Эволюция промптов", callback_data="admin_evolve")],
-            [InlineKeyboardButton("🚀 Growth Hacker", callback_data="admin_growth")],
-            [InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound")],
-            [InlineKeyboardButton("📝 Контент", callback_data="admin_content")],
-            [InlineKeyboardButton("💼 Продажи", callback_data="admin_sales")],
-            [InlineKeyboardButton("➕ Добавить пользователей", callback_data="admin_add")],
+            [
+                InlineKeyboardButton("📊 Статистика", callback_data="admin_stats"),
+                InlineKeyboardButton("👥 Пользователи", callback_data="admin_users"),
+                InlineKeyboardButton("📢 Рассылка", callback_data="admin_broadcast"),
+            ],
+            [
+                InlineKeyboardButton("📝 Пост", callback_data="admin_post"),
+                InlineKeyboardButton("📋 Посты", callback_data="admin_all_posts"),
+                InlineKeyboardButton("🧬 Эволюция", callback_data="admin_evolve"),
+            ],
+            [
+                InlineKeyboardButton("🚀 Growth", callback_data="admin_growth"),
+                InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound"),
+                InlineKeyboardButton("📝 Контент", callback_data="admin_content"),
+            ],
+            [
+                InlineKeyboardButton("💼 Продажи", callback_data="admin_sales"),
+                InlineKeyboardButton("➕ Юзеры", callback_data="admin_add"),
+            ],
         ]
         await query.message.delete()
         await context.bot.send_message(
@@ -1159,17 +1179,25 @@ async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     keyboard = [
-        [InlineKeyboardButton("📊 Статистика", callback_data="admin_stats")],
-        [InlineKeyboardButton("👥 База пользователей", callback_data="admin_users")],
-        [InlineKeyboardButton("📢 Рассылка", callback_data="admin_broadcast")],
-        [InlineKeyboardButton("📝 Опубликовать пост", callback_data="admin_post")],
-        [InlineKeyboardButton("📋 Все посты", callback_data="admin_all_posts")],
-        [InlineKeyboardButton("🧬 Эволюция промптов", callback_data="admin_evolve")],
-        [InlineKeyboardButton("🚀 Growth Hacker", callback_data="admin_growth")],
-        [InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound")],
-        [InlineKeyboardButton("📝 Контент", callback_data="admin_content")],
-        [InlineKeyboardButton("💼 Продажи", callback_data="admin_sales")],
-        [InlineKeyboardButton("➕ Добавить пользователей", callback_data="admin_add")],
+        [
+            InlineKeyboardButton("📊 Статистика", callback_data="admin_stats"),
+            InlineKeyboardButton("👥 Пользователи", callback_data="admin_users"),
+            InlineKeyboardButton("📢 Рассылка", callback_data="admin_broadcast"),
+        ],
+        [
+            InlineKeyboardButton("📝 Пост", callback_data="admin_post"),
+            InlineKeyboardButton("📋 Посты", callback_data="admin_all_posts"),
+            InlineKeyboardButton("🧬 Эволюция", callback_data="admin_evolve"),
+        ],
+        [
+            InlineKeyboardButton("🚀 Growth", callback_data="admin_growth"),
+            InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound"),
+            InlineKeyboardButton("📝 Контент", callback_data="admin_content"),
+        ],
+        [
+            InlineKeyboardButton("💼 Продажи", callback_data="admin_sales"),
+            InlineKeyboardButton("➕ Юзеры", callback_data="admin_add"),
+        ],
     ]
 
     await update.message.reply_text(
