@@ -31,13 +31,17 @@ async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
 
     if await is_premium(user_id):
-        await update.message.reply_text(
+        text = (
             "⭐ У тебя уже есть полный доступ к курсу!\n\n"
             "Команды:\n"
             "/day — текущий урок\n"
             "/next — следующий день\n"
             "/progress — прогресс"
         )
+        if update.callback_query:
+            await update.callback_query.message.edit_text(text)
+        else:
+            await update.message.reply_text(text)
         return
 
     keyboard = [
@@ -46,7 +50,7 @@ async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("🗓 Год — 1500 ⭐", callback_data="buy_year")],
     ]
 
-    await update.message.reply_text(
+    text = (
         "🎓 30-ДНЕВНЫЙ КУРС ПО ВАЙБКОДИНГУ\n\n"
         "Что тебя ждёт:\n\n"
         "📝 Промпт-инжиниринг\n"
@@ -60,9 +64,19 @@ async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "💰 Монетизация\n"
         "Заработок на навыках вайбкодинга\n\n"
         "Бесплатно только День 1.\n\n"
-        "Выбери подписку:",
-        reply_markup=InlineKeyboardMarkup(keyboard),
+        "Выбери подписку:"
     )
+
+    if update.callback_query:
+        await update.callback_query.message.edit_text(
+            text,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+        )
+    else:
+        await update.message.reply_text(
+            text,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+        )
 
 
 async def buy_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
