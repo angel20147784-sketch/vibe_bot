@@ -11,11 +11,11 @@ from openai import AsyncOpenAI
 
 logger = logging.getLogger(__name__)
 
-# Провайдеры API с приоритетами
+# Провайдеры API с приоритетами (Key-3 работает!)
 PROVIDERS = [
     {
-        "name": "OpenRouter",
-        "api_key": os.getenv("OPENROUTER_API_KEY"),
+        "name": "OpenRouter-3",
+        "api_key": os.getenv("OPENROUTER_API_KEY_3"),
         "base_url": "https://openrouter.ai/api/v1",
         "model": "google/gemma-4-31b-it:free",
         "priority": 1,
@@ -24,8 +24,8 @@ PROVIDERS = [
         "cooldown_until": 0,
     },
     {
-        "name": "OpenRouter-2",
-        "api_key": os.getenv("OPENROUTER_API_KEY_2"),
+        "name": "OpenRouter",
+        "api_key": os.getenv("OPENROUTER_API_KEY"),
         "base_url": "https://openrouter.ai/api/v1",
         "model": "google/gemma-4-31b-it:free",
         "priority": 2,
@@ -34,8 +34,8 @@ PROVIDERS = [
         "cooldown_until": 0,
     },
     {
-        "name": "OpenRouter-3",
-        "api_key": os.getenv("OPENROUTER_API_KEY_3"),
+        "name": "OpenRouter-2",
+        "api_key": os.getenv("OPENROUTER_API_KEY_2"),
         "base_url": "https://openrouter.ai/api/v1",
         "model": "google/gemma-4-31b-it:free",
         "priority": 3,
