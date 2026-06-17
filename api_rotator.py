@@ -145,7 +145,7 @@ def generate_sync(prompt: str, max_tokens: int = 512) -> tuple:
                 return r.json()["choices"][0]["message"]["content"], provider["name"]
             
             elif r.status_code == 429:
-                mark_provider_error(provider["name"], cooldown=120)
+                mark_provider_error(provider["name"], cooldown=30)
                 logger.warning(f"⚠️ 429 on {provider['name']}")
                 continue
             
