@@ -22,6 +22,14 @@ ADMIN_IDS = [6928796982, 8639540904]
 PREMIUM_IDS = [8639540904]
 
 
+def is_private_chat(update: Update) -> bool:
+    return update.effective_chat.type == "private"
+
+
+def is_admin(update: Update) -> bool:
+    return update.effective_user.id in ADMIN_IDS
+
+
 def get_day_keyboard(day_num):
     keyboard = []
     if day_num > 1:
@@ -263,6 +271,88 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text="Выбери действие:",
             reply_markup=InlineKeyboardMarkup(keyboard)
         )
+    
+    # Админ-кнопки
+    elif data == "admin_stats":
+        if user_id not in ADMIN_IDS:
+            return
+        import sqlite3
+        db = sqlite3.connect("vibe_bot.db")
+        subs = db.execute("SELECT COUNT(*) FROM subscribers").fetchone()[0]
+        premium = db.execute("SELECT COUNT(*) FROM premium_users").fetchone()[0]
+        db.close()
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text=f"📊 СТАТИСТИКА\n\n"
+                 f"👥 Подписчики: {subs}\n"
+                 f"⭐ Премиум: {premium}\n"
+                 f"📈 Конверсия: {premium/subs*100 if subs else 0:.1f}%"
+        )
+    
+    elif data == "admin_users":
+        if user_id not in ADMIN_IDS:
+            return
+        import sqlite3
+        db = sqlite3.connect("vibe_bot.db")
+        cursor = db.execute("SELECT user_id FROM subscribers")
+        users = [row[0] for row in cursor.fetchall()]
+        db.close()
+        text = f"📋 База ({len(users)}):\n" + "\n".join([f"• {u}" for u in users[:20]])
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text=text)
+    
+    elif data == "admin_post":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="📝 Генерирую пост...")
+        post = await generate_promo_post()
+        if post:
+            await post_to_channel(post)
+            await context.bot.send_message(chat_id=user_id, text=f"✅ Опубликовано!\n\n{post}")
+    
+    elif data == "admin_growth":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="🚀 Growth Hacker...")
+        result = await run_growth_hacker()
+        await context.bot.send_message(chat_id=user_id, text=result or "Ошибка")
+    
+    elif data == "admin_outbound":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="🎯 Outbound...")
+        result = await run_outbound_strategist()
+        await context.bot.send_message(chat_id=user_id, text=result or "Ошибка")
+    
+    elif data == "admin_content":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="📝 Контент...")
+        result = await run_content_creator()
+        await context.bot.send_message(chat_id=user_id, text=result or "Ошибка")
+    
+    elif data == "admin_sales":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="💼 Продажи...")
+        result = await run_sales_coach()
+        await context.bot.send_message(chat_id=user_id, text=result or "Ошибка")
+    
+    elif data == "admin_add":
+        if user_id not in ADMIN_IDS:
+            return
+        context.user_data["waiting_for_user_ids"] = True
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text="📝 Отправь ID или @username пользователей:"
+        )
 
 
 async def manual_post(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -397,6 +487,8 @@ async def course_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def grant_premium(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
     user_id = update.effective_user.id
     if user_id not in ADMIN_IDS:
         await update.message.reply_text("❌ Нет доступа.")
@@ -415,12 +507,16 @@ async def grant_premium(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def myid(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
     user_id = update.effective_user.id
     username = update.effective_user.username or "нет"
     await update.message.reply_text(f"Твой ID: {user_id}\nUsername: @{username}")
 
 
 async def run_agent(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
     user_id = update.effective_user.id
     if user_id not in ADMIN_IDS:
         await update.message.reply_text("❌ Нет доступа.")
@@ -432,6 +528,8 @@ async def run_agent(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def analyze_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
     user_id = update.effective_user.id
     if user_id not in ADMIN_IDS:
         await update.message.reply_text("❌ Нет доступа.")
@@ -443,6 +541,8 @@ async def analyze_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def channels_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
     user_id = update.effective_user.id
     if user_id not in ADMIN_IDS:
         await update.message.reply_text("❌ Нет доступа.")
@@ -454,6 +554,8 @@ async def channels_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def promo_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
     user_id = update.effective_user.id
     if user_id not in ADMIN_IDS:
         await update.message.reply_text("❌ Нет доступа.")
@@ -465,6 +567,8 @@ async def promo_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def growth_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
     user_id = update.effective_user.id
     if user_id not in ADMIN_IDS:
         await update.message.reply_text("❌ Нет доступа.")
@@ -476,6 +580,8 @@ async def growth_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def grow_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
     user_id = update.effective_user.id
     if user_id not in ADMIN_IDS:
         await update.message.reply_text("❌ Нет доступа.")
@@ -496,6 +602,200 @@ async def grow_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text += f"💬 Комментарии:\n{result['comments'][:200]}..."
 
     await update.message.reply_text(text)
+
+
+async def auto_post_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("📝 Генерирую пост...")
+    post = await generate_promo_post()
+    if post:
+        success = await post_to_channel(post)
+        if success:
+            await update.message.reply_text(f"✅ Пост опубликован!\n\n{post}")
+        else:
+            await update.message.reply_text("❌ Ошибка публикации")
+    else:
+        await update.message.reply_text("❌ Ошибка генерации")
+
+
+async def growth_hacker_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🚀 Growth Hacker анализирует...")
+    result = await run_growth_hacker()
+    await update.message.reply_text(result or "Ошибка")
+
+
+async def outbound_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🎯 Outbound Strategist работает...")
+    result = await run_outbound_strategist()
+    await update.message.reply_text(result or "Ошибка")
+
+
+async def content_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("📝 Content Creator создаёт...")
+    result = await run_content_creator()
+    await update.message.reply_text(result or "Ошибка")
+
+
+async def sales_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("💼 Sales Coach готовит...")
+    result = await run_sales_coach()
+    await update.message.reply_text(result or "Ошибка")
+
+
+async def add_users_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    if not context.args:
+        await update.message.reply_text(
+            "Используй: /addusers 123456 789012 345678\n\n"
+            "Или отправь список ID через запятую:\n"
+            "/addusers 123456, 789012, 345678"
+        )
+        return
+
+    added = 0
+    for arg in context.args:
+        for uid_str in arg.split(","):
+            uid_str = uid_str.strip()
+            if uid_str.isdigit():
+                uid = int(uid_str)
+                await add_subscriber(uid)
+                added += 1
+
+    await update.message.reply_text(f"✅ Добавлено {added} пользователей в базу!")
+
+
+async def add_users_text_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    context.user_data["waiting_for_user_ids"] = True
+    await update.message.reply_text(
+        "📝 Отправь список ID или @никнеймов пользователей\n"
+        "(через запятую, пробел или с новой строки):\n\n"
+        "Пример:\n"
+        "@username1\n"
+        "@username2\n"
+        "123456789"
+    )
+
+
+async def find_user_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    if not context.args:
+        await update.message.reply_text("Используй: /finduser @username")
+        return
+
+    username = context.args[0].replace("@", "")
+    
+    await update.message.reply_text(
+        f"🔍 Ищу пользователя @{username}...\n\n"
+        "Telegram API не позволяет искать по username напрямую.\n\n"
+        "Попроси пользователя написать /start боту — его ID автоматически добавится в базу."
+    )
+
+
+async def list_users_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    import sqlite3
+    db = sqlite3.connect("vibe_bot.db")
+    cursor = db.execute("SELECT user_id FROM subscribers")
+    users = [row[0] for row in cursor.fetchall()]
+    db.close()
+
+    if not users:
+        await update.message.reply_text("📭 База пуста")
+        return
+
+    text = f"📋 База подписчиков ({len(users)}):\n\n"
+    for uid in users[:50]:
+        text += f"• {uid}\n"
+    
+    if len(users) > 50:
+        text += f"\n... и ещё {len(users) - 50}"
+
+    await update.message.reply_text(text)
+
+
+async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    keyboard = [
+        [InlineKeyboardButton("📊 Статистика", callback_data="admin_stats")],
+        [InlineKeyboardButton("👥 База пользователей", callback_data="admin_users")],
+        [InlineKeyboardButton("📝 Опубликовать пост", callback_data="admin_post")],
+        [InlineKeyboardButton("🚀 Growth Hacker", callback_data="admin_growth")],
+        [InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound")],
+        [InlineKeyboardButton("📝 Контент", callback_data="admin_content")],
+        [InlineKeyboardButton("💼 Продажи", callback_data="admin_sales")],
+        [InlineKeyboardButton("➕ Добавить пользователей", callback_data="admin_add")],
+    ]
+
+    await update.message.reply_text(
+        "🔧 АДМИН-ПАНЕЛЬ\n\n"
+        "Выбери действие:",
+        reply_markup=InlineKeyboardMarkup(keyboard)
+    )
 
 
 async def auto_post_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -813,6 +1113,7 @@ def main():
     app.add_handler(CommandHandler("adduserslist", add_users_text_cmd))
     app.add_handler(CommandHandler("finduser", find_user_cmd))
     app.add_handler(CommandHandler("listusers", list_users_cmd))
+    app.add_handler(CommandHandler("admin", admin_menu))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
