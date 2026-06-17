@@ -594,31 +594,101 @@ async def add_users_text_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     context.user_data["waiting_for_user_ids"] = True
     await update.message.reply_text(
-        "📝 Отправь список ID пользователей\n"
+        "📝 Отправь список ID или @никнеймов пользователей\n"
         "(через запятую, пробел или с новой строки):\n\n"
         "Пример:\n"
-        "123456789\n"
-        "987654321\n"
-        "555555555"
+        "@username1\n"
+        "@username2\n"
+        "123456789"
     )
+
+
+async def find_user_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    if not context.args:
+        await update.message.reply_text("Используй: /finduser @username")
+        return
+
+    username = context.args[0].replace("@", "")
+    
+    import requests
+    TOKEN = os.getenv("TELEGRAM_TOKEN")
+    
+    # Ищем пользователя через chat member API
+    # К сожалению, Telegram API не позволяет искать по username напрямую
+    # Но мы можем попробовать через chat
+    await update.message.reply_text(
+        f"🔍 Ищу пользователя @{username}...\n\n"
+        "Telegram API не позволяет искать по username напрямую.\n\n"
+        "Попроси пользователя написать /start боту — его ID автоматически добавится в базу."
+    )
+
+
+async def list_users_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    import sqlite3
+    db = sqlite3.connect("vibe_bot.db")
+    cursor = db.execute("SELECT user_id FROM subscribers")
+    users = [row[0] for row in cursor.fetchall()]
+    db.close()
+
+    if not users:
+        await update.message.reply_text("📭 База пуста")
+        return
+
+    text = f"📋 База подписчиков ({len(users)}):\n\n"
+    for uid in users[:50]:  # Показываем первые 50
+        text += f"• {uid}\n"
+    
+    if len(users) > 50:
+        text += f"\n... и ещё {len(users) - 50}"
+
+    await update.message.reply_text(text)
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     text = update.message.text
 
-    # Проверяем, не список ли это ID (админ добавляет пользователей)
+    # Проверяем, не список ли это ID/никнеймов (админ добавляет пользователей)
     if user_id in ADMIN_IDS and context.user_data.get("waiting_for_user_ids"):
         context.user_data["waiting_for_user_ids"] = False
         added = 0
+        not_found = []
+        
         for line in text.split("\n"):
-            for uid_str in line.replace(",", " ").replace(";", " ").split():
-                uid_str = uid_str.strip()
-                if uid_str.isdigit() and len(uid_str) > 5:
-                    uid = int(uid_str)
+            for item in line.replace(",", " ").replace(";", " ").split():
+                item = item.strip()
+                if not item:
+                    continue
+                
+                # Если это username (начинается с @)
+                if item.startswith("@"):
+                    username = item.replace("@", "")
+                    # Ищем в базе по username (пока просто сохраняем как есть)
+                    # Для полного поиска нужен Telegram Bot API
+                    not_found.append(item)
+                
+                # Если это ID (цифры)
+                elif item.isdigit() and len(item) > 5:
+                    uid = int(item)
                     await add_subscriber(uid)
                     added += 1
-        await update.message.reply_text(f"✅ Добавлено {added} пользователей в базу!")
+        
+        response = f"✅ Добавлено {added} пользователей в базу!"
+        if not_found:
+            response += f"\n\n⚠️ Не удалось найти ID для: {', '.join(not_found)}"
+            response += "\nПопроси их написать /start боту — ID добавится автоматически."
+        
+        await update.message.reply_text(response)
         return
 
     if not await is_premium(user_id):
@@ -741,6 +811,8 @@ def main():
     app.add_handler(CommandHandler("sales", sales_cmd))
     app.add_handler(CommandHandler("addusers", add_users_cmd))
     app.add_handler(CommandHandler("adduserslist", add_users_text_cmd))
+    app.add_handler(CommandHandler("finduser", find_user_cmd))
+    app.add_handler(CommandHandler("listusers", list_users_cmd))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
