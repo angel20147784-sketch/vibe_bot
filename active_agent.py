@@ -38,19 +38,23 @@ TARGET_CHANNELS = [
 
 async def generate_promo_post():
     prompt = (
-        "Создай короткий рекламный пост для Telegram-канала о бесплатном курсе вайбкодинга.\n\n"
-        "Курс: 30 дней, бесплатно\n"
-        "Чему научишься: Cursor, Claude, v0.dev, создание сайтов, ботов, SaaS\n\n"
-        "Формат: 3-5 строк, эмодзи, ссылка t.me/CODEScodingbot\n"
-        "Стиль: живой, мотивирующий"
+        "Напиши рекламный пост для Telegram.\n\n"
+        "Курс по вайбкодингу, 30 дней, бесплатно.\n"
+        "Чему научишься: Cursor, Claude, v0.dev\n\n"
+        "Только текст поста. Без пояснений, без \"Вот пост:\", без кавычек.\n"
+        "3-5 строк, эмодзи, ссылка t.me/CODEScodingbot"
     )
 
     try:
         content, provider = await generate_with_rotation(
-            "Ты — маркетолог. Пиши короткие рекламные посты.\n\n" + prompt, max_tokens=256
+            "Ты — маркетолог. Пиши готовые посты без пояснений.\n\n" + prompt, max_tokens=256
         )
         if content:
             logger.info(f"Promo post with {provider}")
+            # Убираем лишние обёртки если есть
+            content = content.strip().strip('"').strip("'")
+            if content.startswith("Вот") or content.startswith("Пост:"):
+                content = content.split("\n", 1)[-1].strip()
             return content
     except Exception as e:
         logger.error(f"Error: {e}")

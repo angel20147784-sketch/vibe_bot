@@ -447,13 +447,13 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             post = variants[idx]
             await query.message.delete()
             
-            # Публикуем в канал
+            # Публикуем ТОЛЬКО текст поста
             success = await post_to_channel(post)
             if success:
                 await add_post(post)
-                await context.bot.send_message(chat_id=user_id, text="✅ Опубликовано!")
+                await context.bot.send_message(chat_id=user_id, text="✅ Готово!")
             else:
-                await context.bot.send_message(chat_id=user_id, text="❌ Ошибка публикации")
+                await context.bot.send_message(chat_id=user_id, text="❌ Ошибка")
         
         context.user_data["post_variants"] = None
     
