@@ -27,6 +27,15 @@ async def init_db():
                 started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS posts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                text TEXT NOT NULL,
+                channel_msg_id INTEGER,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                status TEXT DEFAULT 'published'
+            )
+        """)
         await db.commit()
     logger.info("✅ База данных инициализирована")
 
@@ -98,3 +107,46 @@ async def next_course_day(user_id: int) -> int:
         await set_course_day(user_id, current + 1)
         return current + 1
     return current
+
+
+async def add_post(text: str, channel_msg_id: int = None) -> int:
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute(
+            "INSERT INTO posts (text, channel_msg_id) VALUES (?, ?)",
+            (text, channel_msg_id)
+        )
+        await db.commit()
+        return cursor.lastrowid
+
+
+async def get_all_posts(limit: int = 20) -> list:
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute(
+            "SELECT id, text, created_at, status FROM posts ORDER BY created_at DESC LIMIT ?",
+            (limit,)
+        )
+        return await cursor.fetchall()
+
+
+async def get_post(post_id: int):
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute(
+            "SELECT id, text, created_at, status FROM posts WHERE id = ?",
+            (post_id,)
+        )
+        return await cursor.fetchone()
+
+
+async def update_post(post_id: int, text: str):
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute(
+            "UPDATE posts SET text = ? WHERE id = ?",
+            (text, post_id)
+        )
+        await db.commit()
+
+
+async def delete_post(post_id: int):
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute("DELETE FROM posts WHERE id = ?", (post_id,))
+        await db.commit()

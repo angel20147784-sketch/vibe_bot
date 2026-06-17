@@ -9,7 +9,7 @@ from apscheduler.triggers.cron import CronTrigger
 from content_generator import generate_post
 from scheduler_config import SCHEDULE
 from payments import register_payment_handlers
-from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day, add_premium_user
+from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day, add_premium_user, add_post, get_all_posts, get_post, update_post, delete_post
 from course_data import format_day, COURSE_DAYS
 from ai_agent import scheduled_autonomous_job
 from ai_tutor import ask_tutor, get_onboarding_text
@@ -309,8 +309,105 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(chat_id=user_id, text="📝 Генерирую пост...")
         post = await generate_promo_post()
         if post:
-            await post_to_channel(post)
-            await context.bot.send_message(chat_id=user_id, text=f"✅ Опубликовано!\n\n{post}")
+            success = await post_to_channel(post)
+            if success:
+                await add_post(post)
+                await context.bot.send_message(chat_id=user_id, text=f"✅ Опубликовано!\n\n{post}")
+            else:
+                await context.bot.send_message(chat_id=user_id, text="❌ Ошибка публикации")
+    
+    elif data == "admin_all_posts":
+        if user_id not in ADMIN_IDS:
+            return
+        posts = await get_all_posts(10)
+        if not posts:
+            await query.message.delete()
+            await context.bot.send_message(chat_id=user_id, text="📭 Постов пока нет")
+            return
+        
+        keyboard = []
+        for post_id, text, created_at, status in posts:
+            short_text = text[:30] + "..." if len(text) > 30 else text
+            keyboard.append([InlineKeyboardButton(f"📝 {short_text}", callback_data=f"post_view_{post_id}")])
+        keyboard.append([InlineKeyboardButton("➕ Новый пост", callback_data="admin_post")])
+        keyboard.append([InlineKeyboardButton("◀️ Назад", callback_data="admin_back")])
+        
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text=f"📋 ВСЕ ПОСТЫ ({len(posts)}):\n\nНажми на пост для просмотра:",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+    
+    elif data.startswith("post_view_"):
+        if user_id not in ADMIN_IDS:
+            return
+        post_id = int(data.split("_")[2])
+        post = await get_post(post_id)
+        if not post:
+            await context.bot.send_message(chat_id=user_id, text="❌ Пост не найден")
+            return
+        
+        _, text, created_at, status = post
+        
+        keyboard = [
+            [InlineKeyboardButton("✏️ Редактировать", callback_data=f"post_edit_{post_id}")],
+            [InlineKeyboardButton("🗑 Удалить", callback_data=f"post_delete_{post_id}")],
+            [InlineKeyboardButton("◀️ Назад", callback_data="admin_all_posts")],
+        ]
+        
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text=f"📝 ПОСТ #{post_id}\n\n"
+                 f"Дата: {created_at}\n"
+                 f"Статус: {status}\n\n"
+                 f"{text}",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+    
+    elif data.startswith("post_edit_"):
+        if user_id not in ADMIN_IDS:
+            return
+        post_id = int(data.split("_")[2])
+        context.user_data["editing_post_id"] = post_id
+        context.user_data["waiting_for_post_edit"] = True
+        
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text=f"✏️ Отправь новый текст для поста #{post_id}:"
+        )
+    
+    elif data.startswith("post_delete_"):
+        if user_id not in ADMIN_IDS:
+            return
+        post_id = int(data.split("_")[2])
+        await delete_post(post_id)
+        
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text=f"🗑 Пост #{post_id} удалён!")
+    
+    elif data == "admin_back":
+        if user_id not in ADMIN_IDS:
+            return
+        keyboard = [
+            [InlineKeyboardButton("📊 Статистика", callback_data="admin_stats")],
+            [InlineKeyboardButton("👥 База пользователей", callback_data="admin_users")],
+            [InlineKeyboardButton("📝 Опубликовать пост", callback_data="admin_post")],
+            [InlineKeyboardButton("📋 Все посты", callback_data="admin_all_posts")],
+            [InlineKeyboardButton("🚀 Growth Hacker", callback_data="admin_growth")],
+            [InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound")],
+            [InlineKeyboardButton("📝 Контент", callback_data="admin_content")],
+            [InlineKeyboardButton("💼 Продажи", callback_data="admin_sales")],
+            [InlineKeyboardButton("➕ Добавить пользователей", callback_data="admin_add")],
+        ]
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text="🔧 АДМИН-ПАНЕЛЬ\n\nВыбери действие:",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
     
     elif data == "admin_growth":
         if user_id not in ADMIN_IDS:
@@ -784,6 +881,7 @@ async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("📊 Статистика", callback_data="admin_stats")],
         [InlineKeyboardButton("👥 База пользователей", callback_data="admin_users")],
         [InlineKeyboardButton("📝 Опубликовать пост", callback_data="admin_post")],
+        [InlineKeyboardButton("📋 Все посты", callback_data="admin_all_posts")],
         [InlineKeyboardButton("🚀 Growth Hacker", callback_data="admin_growth")],
         [InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound")],
         [InlineKeyboardButton("📝 Контент", callback_data="admin_content")],
@@ -970,14 +1068,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if not item:
                     continue
                 
-                # Если это username (начинается с @)
                 if item.startswith("@"):
                     username = item.replace("@", "")
-                    # Ищем в базе по username (пока просто сохраняем как есть)
-                    # Для полного поиска нужен Telegram Bot API
                     not_found.append(item)
                 
-                # Если это ID (цифры)
                 elif item.isdigit() and len(item) > 5:
                     uid = int(item)
                     await add_subscriber(uid)
@@ -990,6 +1084,28 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         await update.message.reply_text(response)
         return
+
+    # Проверяем, не редактируется ли пост
+    if user_id in ADMIN_IDS and context.user_data.get("waiting_for_post_edit"):
+        context.user_data["waiting_for_post_edit"] = False
+        post_id = context.user_data.get("editing_post_id")
+        if post_id:
+            await update_post(post_id, text)
+            await update.message.reply_text(f"✅ Пост #{post_id} обновлён!")
+            
+            # Показываем обновлённый пост
+            post = await get_post(post_id)
+            if post:
+                keyboard = [
+                    [InlineKeyboardButton("✏️ Редактировать", callback_data=f"post_edit_{post_id}")],
+                    [InlineKeyboardButton("🗑 Удалить", callback_data=f"post_delete_{post_id}")],
+                    [InlineKeyboardButton("◀️ Назад", callback_data="admin_all_posts")],
+                ]
+                await update.message.reply_text(
+                    f"📝 ПОСТ #{post_id}\n\n{post[1]}",
+                    reply_markup=InlineKeyboardMarkup(keyboard)
+                )
+            return
 
     if not await is_premium(user_id):
         return
