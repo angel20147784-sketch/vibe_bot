@@ -318,22 +318,38 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if user_id not in ADMIN_IDS:
             return
         await query.message.delete()
-        await context.bot.send_message(chat_id=user_id, text="📝 Генерирую пост...")
-        post = await generate_promo_post()
-        if post:
-            keyboard = [
-                [InlineKeyboardButton("✅ Опубликовать", callback_data=f"confirm_post_{hash(post) % 100000}")],
-                [InlineKeyboardButton("❌ Отмена", callback_data="admin_back")],
-            ]
-            # Сохраняем пост во временное хранилище
-            context.user_data["pending_post"] = post
-            await context.bot.send_message(
-                chat_id=user_id,
-                text=f"📝 ПРЕДПРОСМОТР ПОСТА:\n\n{truncate_message(post)}\n\nОпубликовать в канал?",
-                reply_markup=InlineKeyboardMarkup(keyboard)
-            )
-        else:
+        await context.bot.send_message(chat_id=user_id, text="📝 Генерирую 3 варианта поста...")
+        
+        # Генерируем 3 варианта
+        variants = []
+        for i in range(3):
+            post = await generate_promo_post()
+            if post:
+                variants.append(post)
+        
+        if not variants:
             await context.bot.send_message(chat_id=user_id, text="❌ Ошибка генерации")
+            return
+        
+        # Сохраняем варианты
+        context.user_data["post_variants"] = variants
+        
+        # Показываем варианты для выбора
+        keyboard = []
+        for i, post in enumerate(variants):
+            short = post[:50] + "..." if len(post) > 50 else post
+            keyboard.append([InlineKeyboardButton(f"📝 Вариант {i+1}: {short}", callback_data=f"select_post_{i}")])
+        keyboard.append([InlineKeyboardButton("❌ Отмена", callback_data="admin_back")])
+        
+        text = "📝 ВЫБЕРИ ВАРИАНТ ДЛЯ ПУБЛИКАЦИИ:\n\n"
+        for i, post in enumerate(variants):
+            text += f"--- Вариант {i+1} ---\n{post}\n\n"
+        
+        await context.bot.send_message(
+            chat_id=user_id,
+            text=truncate_message(text),
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
     
     elif data == "admin_all_posts":
         if user_id not in ADMIN_IDS:
@@ -420,6 +436,26 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             info = get_skill_info(skill_key)
             await query.message.delete()
             await context.bot.send_message(chat_id=user_id, text=info)
+    
+    elif data.startswith("select_post_"):
+        if user_id not in ADMIN_IDS:
+            return
+        idx = int(data.split("_")[2])
+        variants = context.user_data.get("post_variants", [])
+        
+        if idx < len(variants):
+            post = variants[idx]
+            await query.message.delete()
+            
+            # Публикуем в канал
+            success = await post_to_channel(post)
+            if success:
+                await add_post(post)
+                await context.bot.send_message(chat_id=user_id, text="✅ Опубликовано!")
+            else:
+                await context.bot.send_message(chat_id=user_id, text="❌ Ошибка публикации")
+        
+        context.user_data["post_variants"] = None
     
     elif data.startswith("confirm_post_"):
         if user_id not in ADMIN_IDS:
