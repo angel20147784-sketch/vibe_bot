@@ -14,11 +14,21 @@ logger = logging.getLogger(__name__)
 # Провайдеры API с приоритетами
 PROVIDERS = [
     {
+        "name": "DeepSeek",
+        "api_key": os.getenv("DEEPSEEK_API_KEY"),
+        "base_url": "https://api.deepseek.com/v1",
+        "model": "deepseek-chat",
+        "priority": 1,
+        "last_error": 0,
+        "error_count": 0,
+        "cooldown_until": 0,
+    },
+    {
         "name": "Groq",
         "api_key": os.getenv("GROQ_API_KEY"),
         "base_url": "https://api.groq.com/openai/v1",
         "model": "llama-3.3-70b-versatile",
-        "priority": 1,
+        "priority": 2,
         "last_error": 0,
         "error_count": 0,
         "cooldown_until": 0,
@@ -28,7 +38,7 @@ PROVIDERS = [
         "api_key": os.getenv("OPENROUTER_API_KEY_3"),
         "base_url": "https://openrouter.ai/api/v1",
         "model": "google/gemma-4-31b-it:free",
-        "priority": 2,
+        "priority": 3,
         "last_error": 0,
         "error_count": 0,
         "cooldown_until": 0,
@@ -36,16 +46,6 @@ PROVIDERS = [
     {
         "name": "OpenRouter",
         "api_key": os.getenv("OPENROUTER_API_KEY"),
-        "base_url": "https://openrouter.ai/api/v1",
-        "model": "google/gemma-4-31b-it:free",
-        "priority": 3,
-        "last_error": 0,
-        "error_count": 0,
-        "cooldown_until": 0,
-    },
-    {
-        "name": "OpenRouter-2",
-        "api_key": os.getenv("OPENROUTER_API_KEY_2"),
         "base_url": "https://openrouter.ai/api/v1",
         "model": "google/gemma-4-31b-it:free",
         "priority": 4,
