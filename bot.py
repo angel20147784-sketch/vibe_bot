@@ -625,9 +625,13 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         sent = 0
         failed = 0
         
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton("🚀 Начать", url="https://t.me/CODEScodingbot?start=course")]
+        ])
+        
         for uid in subscribers:
             try:
-                await context.bot.send_message(chat_id=uid, text=broadcast_text)
+                await context.bot.send_message(chat_id=uid, text=broadcast_text, reply_markup=keyboard)
                 sent += 1
                 await asyncio.sleep(0.1)
             except Exception as e:
@@ -1469,7 +1473,10 @@ async def tutor(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def publish_to_channel(bot: Bot, post: str):
     try:
-        await bot.send_message(chat_id=CHANNEL_ID, text=post)
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton("🚀 Начать", url="https://t.me/CODEScodingbot?start=course")]
+        ])
+        await bot.send_message(chat_id=CHANNEL_ID, text=post, reply_markup=keyboard)
         logger.info("✅ Пост опубликован в канал")
     except Exception as e:
         logger.error(f"❌ Ошибка публикации в канал: {e}")

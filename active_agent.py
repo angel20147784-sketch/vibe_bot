@@ -63,9 +63,14 @@ async def generate_promo_post():
 
 async def post_to_channel(text):
     try:
+        keyboard = {
+            "inline_keyboard": [
+                [{"text": "🚀 Начать", "url": "https://t.me/CODEScodingbot?start=course"}]
+            ]
+        }
         r = requests.post(
             f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            json={"chat_id": CHANNEL_ID, "text": text}
+            json={"chat_id": CHANNEL_ID, "text": text, "reply_markup": keyboard}
         )
         return r.json().get("ok")
     except Exception as e:
@@ -119,9 +124,14 @@ async def find合作_opportunities():
 
 async def post_to_channel(text):
     try:
+        keyboard = {
+            "inline_keyboard": [
+                [{"text": "🚀 Начать", "url": "https://t.me/CODEScodingbot?start=course"}]
+            ]
+        }
         r = requests.post(
             f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            json={"chat_id": CHANNEL_ID, "text": text}
+            json={"chat_id": CHANNEL_ID, "text": text, "reply_markup": keyboard}
         )
         return r.json().get("ok")
     except Exception as e:
