@@ -560,9 +560,66 @@ async def sales_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(result or "Ошибка")
 
 
+async def add_users_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    if not context.args:
+        await update.message.reply_text(
+            "Используй: /addusers 123456 789012 345678\n\n"
+            "Или отправь список ID через запятую:\n"
+            "/addusers 123456, 789012, 345678"
+        )
+        return
+
+    added = 0
+    for arg in context.args:
+        for uid_str in arg.split(","):
+            uid_str = uid_str.strip()
+            if uid_str.isdigit():
+                uid = int(uid_str)
+                await add_subscriber(uid)
+                added += 1
+
+    await update.message.reply_text(f"✅ Добавлено {added} пользователей в базу!")
+
+
+async def add_users_text_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    context.user_data["waiting_for_user_ids"] = True
+    await update.message.reply_text(
+        "📝 Отправь список ID пользователей\n"
+        "(через запятую, пробел или с новой строки):\n\n"
+        "Пример:\n"
+        "123456789\n"
+        "987654321\n"
+        "555555555"
+    )
+
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     text = update.message.text
+
+    # Проверяем, не список ли это ID (админ добавляет пользователей)
+    if user_id in ADMIN_IDS and context.user_data.get("waiting_for_user_ids"):
+        context.user_data["waiting_for_user_ids"] = False
+        added = 0
+        for line in text.split("\n"):
+            for uid_str in line.replace(",", " ").replace(";", " ").split():
+                uid_str = uid_str.strip()
+                if uid_str.isdigit() and len(uid_str) > 5:
+                    uid = int(uid_str)
+                    await add_subscriber(uid)
+                    added += 1
+        await update.message.reply_text(f"✅ Добавлено {added} пользователей в базу!")
+        return
 
     if not await is_premium(user_id):
         return
@@ -682,6 +739,8 @@ def main():
     app.add_handler(CommandHandler("outbound", outbound_cmd))
     app.add_handler(CommandHandler("content", content_cmd))
     app.add_handler(CommandHandler("sales", sales_cmd))
+    app.add_handler(CommandHandler("addusers", add_users_cmd))
+    app.add_handler(CommandHandler("adduserslist", add_users_text_cmd))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
