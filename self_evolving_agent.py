@@ -7,25 +7,10 @@ import json
 import asyncio
 import logging
 import random
-from openai import AsyncOpenAI
 from datetime import datetime
+from api_rotator import generate_with_rotation
 
 logger = logging.getLogger(__name__)
-
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
-_client = None
-
-
-def get_client():
-    global _client
-    if _client is None:
-        _client = AsyncOpenAI(
-            api_key=OPENROUTER_API_KEY,
-            base_url="https://openrouter.ai/api/v1",
-            timeout=60.0,
-        )
-    return _client
 
 
 # Словарь с промптами для эволюции
@@ -84,20 +69,10 @@ EVOLVING_PROMPTS = {
 
 
 async def generate_with_prompt(prompt: str, max_tokens: int = 512) -> str:
-    client = get_client()
-    try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": "Создай контент для Telegram-канала о вайбкодинге."},
-            ],
-            max_tokens=max_tokens,
-        )
-        return response.choices[0].message.content
-    except Exception as e:
-        logger.error(f"Error: {e}")
-        return None
+    content, provider = await generate_with_rotation(prompt, max_tokens)
+    if content:
+        logger.info(f"✅ Generated with {provider}")
+    return content
 
 
 async def evaluate_content(content: str) -> float:

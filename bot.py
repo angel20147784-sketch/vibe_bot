@@ -921,6 +921,27 @@ async def prompts_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text)
 
 
+async def providers_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    from api_rotator import get_provider_status
+    status = get_provider_status()
+    
+    text = "🔌 СТАТУС API ПРОВАЙДЕРОВ:\n\n"
+    for p in status:
+        emoji = "✅" if p["available"] else "❌"
+        active = " (АКТИВЕН)" if p["active"] else ""
+        text += f"{emoji} {p['name']}{active}\n"
+        text += f"   Ошибок: {p['errors']}\n\n"
+    
+    await update.message.reply_text(text)
+
+
 async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_private_chat(update):
         return
@@ -1285,6 +1306,7 @@ def main():
     app.add_handler(CommandHandler("admin", admin_menu))
     app.add_handler(CommandHandler("evolve", evolve_cmd))
     app.add_handler(CommandHandler("prompts", prompts_cmd))
+    app.add_handler(CommandHandler("providers", providers_cmd))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)

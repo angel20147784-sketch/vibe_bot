@@ -6,29 +6,10 @@ import os
 import random
 import asyncio
 import logging
-from openai import AsyncOpenAI
+from api_rotator import generate_with_rotation
 from course_data import COURSE_DAYS, WEEK_NAMES
 
 logger = logging.getLogger(__name__)
-
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
-_client = None
-
-
-def get_client():
-    global _client
-    if _client is None:
-        _client = AsyncOpenAI(
-            api_key=OPENROUTER_API_KEY,
-            base_url="https://openrouter.ai/api/v1",
-            timeout=60.0,
-            default_headers={
-                "HTTP-Referer": "https://t.me/codesergo",
-                "X-Title": "VibeBot",
-            },
-        )
-    return _client
 
 
 CHANNEL_TOPICS = [
@@ -83,8 +64,6 @@ SYSTEM_PROMPT = """Ты — автор Telegram-канала о вайбкоди
 
 
 async def generate_channel_post(topic_type=None, **kwargs):
-    client = get_client()
-
     if topic_type is None:
         topic_type = random.choice(CHANNEL_TOPICS)
 
@@ -102,15 +81,11 @@ async def generate_channel_post(topic_type=None, **kwargs):
 
     for attempt in range(3):
         try:
-            response = await client.chat.completions.create(
-                model="google/gemma-4-31b-it:free",
-                messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": user_prompt},
-                ],
-                max_tokens=512,
-            )
-            return response.choices[0].message.content
+            prompt = f"{SYSTEM_PROMPT}\n\n{user_prompt}"
+            content, provider = await generate_with_rotation(prompt, max_tokens=512)
+            if content:
+                logger.info(f"Channel post generated with {provider}")
+                return content
         except Exception as e:
             logger.warning(f"Attempt {attempt + 1} failed: {e}")
             await asyncio.sleep(2 ** attempt)
@@ -119,7 +94,6 @@ async def generate_channel_post(topic_type=None, **kwargs):
 
 
 async def generate_course_post(day_num):
-    client = get_client()
     day = COURSE_DAYS.get(day_num)
     if not day:
         return None
@@ -137,15 +111,11 @@ async def generate_course_post(day_num):
 
     for attempt in range(3):
         try:
-            response = await client.chat.completions.create(
-                model="google/gemma-4-31b-it:free",
-                messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": prompt},
-                ],
-                max_tokens=512,
-            )
-            return response.choices[0].message.content
+            full_prompt = f"{SYSTEM_PROMPT}\n\n{prompt}"
+            content, provider = await generate_with_rotation(full_prompt, max_tokens=512)
+            if content:
+                logger.info(f"Course post generated with {provider}")
+                return content
         except Exception as e:
             logger.warning(f"Attempt {attempt + 1} failed: {e}")
             await asyncio.sleep(2 ** attempt)

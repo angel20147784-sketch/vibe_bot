@@ -5,24 +5,9 @@
 import os
 import asyncio
 import logging
-from openai import AsyncOpenAI
+from api_rotator import generate_with_rotation
 
 logger = logging.getLogger(__name__)
-
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
-_client = None
-
-
-def get_client():
-    global _client
-    if _client is None:
-        _client = AsyncOpenAI(
-            api_key=OPENROUTER_API_KEY,
-            base_url="https://openrouter.ai/api/v1",
-            timeout=60.0,
-        )
-    return _client
 
 
 SEARCH_QUERIES = [
@@ -95,8 +80,6 @@ SYSTEM_PROMPT = """Ты — ИИ-агент для поиска подписчи
 
 
 async def analyze_audience():
-    client = get_client()
-
     prompt = (
         "Проанализируй целевую аудиторию для Telegram-канала о вайбкодинге.\n\n"
         "Аудитория:\n"
@@ -112,23 +95,18 @@ async def analyze_audience():
     )
 
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=1024,
+        content, provider = await generate_with_rotation(
+            f"{SYSTEM_PROMPT}\n\n{prompt}", max_tokens=1024
         )
-        return response.choices[0].message.content
+        if content:
+            logger.info(f"Audience analysis with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Error: {e}")
-        return None
+    return None
 
 
 async def find_similar_channels():
-    client = get_client()
-
     prompt = (
         "Найди Telegram-каналы похожие на @CODEScoding.\n\n"
         "Тематика: вайбкодинг, программирование, ИИ\n\n"
@@ -140,23 +118,18 @@ async def find_similar_channels():
     )
 
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=1024,
+        content, provider = await generate_with_rotation(
+            f"{SYSTEM_PROMPT}\n\n{prompt}", max_tokens=1024
         )
-        return response.choices[0].message.content
+        if content:
+            logger.info(f"Similar channels with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Error: {e}")
-        return None
+    return None
 
 
 async def create_promo_texts():
-    client = get_client()
-
     prompt = (
         "Создай 5 текстов для привлечения подписчиков в @CODEScoding.\n\n"
         "Форматы:\n"
@@ -169,23 +142,18 @@ async def create_promo_texts():
     )
 
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=1500,
+        content, provider = await generate_with_rotation(
+            f"{SYSTEM_PROMPT}\n\n{prompt}", max_tokens=1500
         )
-        return response.choices[0].message.content
+        if content:
+            logger.info(f"Promo texts with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Error: {e}")
-        return None
+    return None
 
 
 async def growth_strategy():
-    client = get_client()
-
     prompt = (
         "Составь стратегию роста Telegram-канала @CODEScoding на 30 дней.\n\n"
         "Текущая аудитория: ~100 подписчиков\n"
@@ -198,15 +166,12 @@ async def growth_strategy():
     )
 
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=1500,
+        content, provider = await generate_with_rotation(
+            f"{SYSTEM_PROMPT}\n\n{prompt}", max_tokens=1500
         )
-        return response.choices[0].message.content
+        if content:
+            logger.info(f"Growth strategy with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Error: {e}")
-        return None
+    return None

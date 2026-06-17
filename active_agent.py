@@ -6,26 +6,12 @@ import os
 import asyncio
 import logging
 import requests
-from openai import AsyncOpenAI
+from api_rotator import generate_with_rotation
 
 logger = logging.getLogger(__name__)
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
-
-_client = None
-
-
-def get_client():
-    global _client
-    if _client is None:
-        _client = AsyncOpenAI(
-            api_key=OPENROUTER_API_KEY,
-            base_url="https://openrouter.ai/api/v1",
-            timeout=60.0,
-        )
-    return _client
 
 
 PROMO_TEXTS = [
@@ -51,8 +37,6 @@ TARGET_CHANNELS = [
 
 
 async def generate_promo_post():
-    client = get_client()
-
     prompt = (
         "Создай короткий рекламный пост для Telegram-канала о бесплатном курсе вайбкодинга.\n\n"
         "Курс: 30 дней, бесплатно\n"
@@ -62,18 +46,71 @@ async def generate_promo_post():
     )
 
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": "Ты — маркетолог. Пиши короткие рекламные посты."},
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=256,
+        content, provider = await generate_with_rotation(
+            "Ты — маркетолог. Пиши короткие рекламные посты.\n\n" + prompt, max_tokens=256
         )
-        return response.choices[0].message.content
+        if content:
+            logger.info(f"Promo post with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Error: {e}")
-        return None
+    return None
+
+
+async def post_to_channel(text):
+    try:
+        r = requests.post(
+            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+            json={"chat_id": CHANNEL_ID, "text": text}
+        )
+        return r.json().get("ok")
+    except Exception as e:
+        logger.error(f"Error posting: {e}")
+        return False
+
+
+async def comment_on_posts():
+    """Комментирует посты в других каналах (через search)"""
+    prompt = (
+        "Найди 5 свежих постов в Telegram-каналах о программировании и ИИ.\n"
+        "Предложи полезные комментарии к каждому посту.\n"
+        "Формат: номер поста + текст комментария\n"
+        "Стиль: экспертный, полезный"
+    )
+
+    try:
+        content, provider = await generate_with_rotation(
+            "Ты — эксперт по вайбкодингу.\n\n" + prompt, max_tokens=512
+        )
+        if content:
+            logger.info(f"Comments with {provider}")
+            return content
+    except Exception as e:
+        logger.error(f"Error: {e}")
+    return None
+
+
+async def find合作_opportunities():
+    """Ищет каналы для сотрудничества"""
+    prompt = (
+        "Найди 10 Telegram-каналов с аудиторией 500-5000 подписчиков.\n"
+        "Тематика: программирование, ИИ, стартапы\n\n"
+        "Для каждого канала предложи:\n"
+        "1. Название\n"
+        "2. Почему подходит\n"
+        "3. Как сотрудничать"
+    )
+
+    try:
+        content, provider = await generate_with_rotation(
+            "Ты — бизнес-аналитик.\n\n" + prompt, max_tokens=1024
+        )
+        if content:
+            logger.info(f"Opportunities with {provider}")
+            return content
+    except Exception as e:
+        logger.error(f"Error: {e}")
+    return None
 
 
 async def post_to_channel(text):

@@ -5,24 +5,9 @@
 import os
 import asyncio
 import logging
-from openai import AsyncOpenAI
+from api_rotator import generate_with_rotation
 
 logger = logging.getLogger(__name__)
-
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
-_client = None
-
-
-def get_client():
-    global _client
-    if _client is None:
-        _client = AsyncOpenAI(
-            api_key=OPENROUTER_API_KEY,
-            base_url="https://openrouter.ai/api/v1",
-            timeout=60.0,
-        )
-    return _client
 
 
 GROWTH_HACKER_PROMPT = """Ты — Growth Hacker, эксперт по росту аудитории.
@@ -92,68 +77,48 @@ SALES_COACH_PROMPT = """Ты — Sales Coach, эксперт по продажа
 
 
 async def run_growth_hacker():
-    client = get_client()
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": GROWTH_HACKER_PROMPT},
-                {"role": "user", "content": "Дай план роста Telegram-канала @CODEScoding на 30 дней. Текущая аудитория: 100 подписчиков. Цель: 1000."},
-            ],
-            max_tokens=1024,
-        )
-        return response.choices[0].message.content
+        prompt = f"{GROWTH_HACKER_PROMPT}\n\nДай план роста Telegram-канала @CODEScoding на 30 дней. Текущая аудитория: 100 подписчиков. Цель: 1000."
+        content, provider = await generate_with_rotation(prompt, max_tokens=1024)
+        if content:
+            logger.info(f"Growth Hacker responded with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Growth Hacker error: {e}")
-        return None
+    return None
 
 
 async def run_outbound_strategist():
-    client = get_client()
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": OUTBOUND_STRATEGIST_PROMPT},
-                {"role": "user", "content": "Создай outbound-стратегию для продажи курса вайбкодинга. Курс: 30 дней, 200 Stars. Целевая аудитория: новички в программировании."},
-            ],
-            max_tokens=1024,
-        )
-        return response.choices[0].message.content
+        prompt = f"{OUTBOUND_STRATEGIST_PROMPT}\n\nСоздай outbound-стратегию для продажи курса вайбкодинга. Курс: 30 дней, 200 Stars. Целевая аудитория: новички в программировании."
+        content, provider = await generate_with_rotation(prompt, max_tokens=1024)
+        if content:
+            logger.info(f"Outbound responded with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Outbound error: {e}")
-        return None
+    return None
 
 
 async def run_content_creator():
-    client = get_client()
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": CONTENT_CREATOR_PROMPT},
-                {"role": "user", "content": "Создай контент-план и 5 постов для Telegram-канала @CODEScoding о курсе вайбкодинга."},
-            ],
-            max_tokens=1500,
-        )
-        return response.choices[0].message.content
+        prompt = f"{CONTENT_CREATOR_PROMPT}\n\nСоздай контент-план и 5 постов для Telegram-канала @CODEScoding о курсе вайбкодинга."
+        content, provider = await generate_with_rotation(prompt, max_tokens=1500)
+        if content:
+            logger.info(f"Content Creator responded with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Content error: {e}")
-        return None
+    return None
 
 
 async def run_sales_coach():
-    client = get_client()
     try:
-        response = await client.chat.completions.create(
-            model="google/gemma-4-31b-it:free",
-            messages=[
-                {"role": "system", "content": SALES_COACH_PROMPT},
-                {"role": "user", "content": "Создай скрипт продаж для курса вайбкодинга. Обработай возражения: 'Дорого', 'Нет времени', 'Я не программист'."},
-            ],
-            max_tokens=1024,
-        )
-        return response.choices[0].message.content
+        prompt = f"{SALES_COACH_PROMPT}\n\nСоздай скрипт продаж для курса вайбкодинга. Обработай возражения: 'Дорого', 'Нет времени', 'Я не программист'."
+        content, provider = await generate_with_rotation(prompt, max_tokens=1024)
+        if content:
+            logger.info(f"Sales Coach responded with {provider}")
+            return content
     except Exception as e:
         logger.error(f"Sales error: {e}")
-        return None
+    return None

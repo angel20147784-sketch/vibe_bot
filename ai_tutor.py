@@ -4,25 +4,10 @@
 
 import os
 import logging
-from openai import AsyncOpenAI
+from api_rotator import generate_with_rotation
 from course_data import COURSE_DAYS, WEEK_NAMES
 
 logger = logging.getLogger(__name__)
-
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
-_client = None
-
-
-def get_client():
-    global _client
-    if _client is None:
-        _client = AsyncOpenAI(
-            api_key=OPENROUTER_API_KEY,
-            base_url="https://openrouter.ai/api/v1",
-            timeout=60.0,
-        )
-    return _client
 
 
 TUTOR_SYSTEM = """Ты — ИИ-наставник Telegram-канала по вайбкодингу @codesergo.
@@ -91,8 +76,6 @@ def get_onboarding_text(user_day):
 
 
 async def ask_tutor(question, current_day=1):
-    client = get_client()
-
     day_info = COURSE_DAYS.get(current_day, {})
     week = (current_day - 1) // 7 + 1
     week_name = WEEK_NAMES.get(week, "")
@@ -107,15 +90,11 @@ async def ask_tutor(question, current_day=1):
 
     for attempt in range(3):
         try:
-            response = await client.chat.completions.create(
-                model="google/gemma-4-31b-it:free",
-                messages=[
-                    {"role": "system", "content": TUTOR_SYSTEM},
-                    {"role": "user", "content": context},
-                ],
-                max_tokens=512,
-            )
-            return response.choices[0].message.content
+            prompt = f"{TUTOR_SYSTEM}\n\n{context}"
+            content, provider = await generate_with_rotation(prompt, max_tokens=512)
+            if content:
+                logger.info(f"Tutor responded with {provider}")
+                return content
         except Exception as e:
             logger.warning(f"Tutor attempt {attempt + 1} failed: {e}")
 

@@ -3,30 +3,11 @@ import random
 import asyncio
 import logging
 from dotenv import load_dotenv
-from openai import AsyncOpenAI
+from api_rotator import generate_with_rotation
 
 load_dotenv()
 
 logger = logging.getLogger(__name__)
-
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
-_client: AsyncOpenAI | None = None
-
-
-def get_client() -> AsyncOpenAI:
-    global _client
-    if _client is None:
-        _client = AsyncOpenAI(
-            api_key=OPENROUTER_API_KEY,
-            base_url="https://openrouter.ai/api/v1",
-            timeout=60.0,
-            default_headers={
-                "HTTP-Referer": "https://t.me/codesergo",
-                "X-Title": "VibeBot",
-            },
-        )
-    return _client
 
 
 TOPICS = [
@@ -83,20 +64,13 @@ async def generate_post(topic: str | None = None, retries: int = 3) -> str:
     if topic is None:
         topic = random.choice(TOPICS)
 
-    client = get_client()
-
     for attempt in range(retries):
         try:
-            response = await client.chat.completions.create(
-                model="google/gemma-4-31b-it:free",
-                messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": f"Напиши пост на тему: {topic}"},
-                ],
-                max_tokens=1024,
-            )
-            return response.choices[0].message.content
-
+            prompt = f"{SYSTEM_PROMPT}\n\nНапиши пост на тему: {topic}"
+            content, provider = await generate_with_rotation(prompt, max_tokens=1024)
+            if content:
+                logger.info(f"Post generated with {provider}")
+                return content
         except Exception as e:
             logger.warning(f"Попытка {attempt + 1}/{retries} не удалась: {e}")
             if attempt < retries - 1:
