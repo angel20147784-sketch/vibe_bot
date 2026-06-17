@@ -1584,9 +1584,15 @@ def main():
     app.add_handler(CommandHandler("providers", providers_cmd))
     app.add_handler(CommandHandler("1c", onec_skills_cmd))
     app.add_handler(CommandHandler("1cask", onec_ask_cmd))
+    # Платёжные хендлеры регистрируем в группе с более высоким приоритетом
+    # (меньший номер группы обрабатывается раньше), чтобы нажатия
+    # buy_week/buy_month/buy_year перехватывались buy_callback из payments.py
+    # раньше общего button_callback — иначе button_callback "проглатывает"
+    # update без действия, и окно оплаты не появляется.
+    register_payment_handlers(app, group=-1)
+
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    register_payment_handlers(app)
 
     # Обработчики ошибок
     async def error_handler(update, context):

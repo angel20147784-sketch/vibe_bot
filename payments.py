@@ -113,7 +113,10 @@ async def buy_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     plan_key = query.data.replace("buy_", "")
     plan = PLANS.get(plan_key)
     if not plan:
+        logger.error(f"Plan not found: {plan_key}")
         return
+
+    logger.info(f"Creating invoice for plan: {plan_key}, price: {plan['price']}")
 
     try:
         await context.bot.send_invoice(
@@ -125,6 +128,7 @@ async def buy_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             currency="XTR",
             prices=[LabeledPrice(plan["title"], plan["price"])],
         )
+        logger.info("Invoice sent successfully")
     except Exception as e:
         logger.error(f"Invoice error: {e}")
         await context.bot.send_message(
@@ -225,10 +229,10 @@ async def resources(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-def register_payment_handlers(app):
+def register_payment_handlers(app, group: int = 0):
     app.add_handler(CommandHandler("buy", buy))
     app.add_handler(CommandHandler("premium_post", premium_post))
     app.add_handler(CommandHandler("resources", resources))
-    app.add_handler(CallbackQueryHandler(buy_callback, pattern=r"^buy_"))
+    app.add_handler(CallbackQueryHandler(buy_callback, pattern=r"^buy_"), group=group)
     app.add_handler(PreCheckoutQueryHandler(pre_checkout))
     app.add_handler(MessageHandler(filters.SUCCESSFUL_PAYMENT, successful_payment))
