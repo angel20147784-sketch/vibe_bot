@@ -1416,12 +1416,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(truncate_message(answer))
         return
 
-    if not await is_premium(user_id):
-        return
-
-    day = await get_course_day(user_id)
+    # Все пользователи могут задавать вопросы
     await update.message.reply_text("🤔 Думаю над ответом...")
-
+    
+    day = await get_course_day(user_id) if await is_premium(user_id) else 1
     answer = await ask_tutor(text, current_day=day)
     await update.message.reply_text(truncate_message(answer))
 
