@@ -9,6 +9,7 @@ from apscheduler.triggers.cron import CronTrigger
 from content_generator import generate_post
 from scheduler_config import SCHEDULE
 from payments import register_payment_handlers
+from renewal_reminders import register_renewal_job
 from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day, add_premium_user, add_post, get_all_posts, get_post, update_post, delete_post, add_referral, get_referral_count, get_total_referrals
 from course_data import format_day, COURSE_DAYS
 from ai_agent import scheduled_autonomous_job
@@ -808,13 +809,17 @@ async def grant_premium(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     if not context.args:
-        await update.message.reply_text("Используй: /grant <user_id>")
+        await update.message.reply_text("Используй: /grant <user_id> [week|month|year]\nПо умолчанию: year")
         return
     
     try:
         target_id = int(context.args[0])
-        await add_premium_user(target_id)
-        await update.message.reply_text(f"✅ Подписка выдана пользователю {target_id}")
+        plan = context.args[1] if len(context.args) > 1 else "year"
+        if plan not in ("week", "month", "year"):
+            await update.message.reply_text("❌ План должен быть: week, month или year")
+            return
+        new_expiry = await add_premium_user(target_id, plan=plan)
+        await update.message.reply_text(f"✅ Подписка ({plan}) выдана пользователю {target_id} до {new_expiry}")
     except ValueError:
         await update.message.reply_text("❌ Неверный ID")
 
@@ -1525,7 +1530,7 @@ async def growth_job(bot: Bot):
 async def post_init(application: Application):
     await init_db()
     for uid in PREMIUM_IDS:
-        await add_premium_user(uid)
+        await add_premium_user(uid, plan="year")
         logger.info(f"✅ Premium granted to {uid}")
 
     scheduler = AsyncIOScheduler()
@@ -1537,6 +1542,8 @@ async def post_init(application: Application):
             id=job["id"],
         )
         logger.info(f"📅 Задача {job['id']} запланирована на {job['hour']}:{job['minute']:02d}")
+
+    register_renewal_job(scheduler, application)
 
     scheduler.start()
     logger.info("✅ Планировщик запущен")

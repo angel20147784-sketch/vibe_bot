@@ -1,7 +1,7 @@
 import logging
 from telegram import Update, LabeledPrice, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, PreCheckoutQueryHandler, MessageHandler, CallbackQueryHandler, filters, CommandHandler
-from db import add_premium_user, is_premium
+from db import add_premium_user, is_premium, get_premium_info
 
 logger = logging.getLogger(__name__)
 
@@ -31,23 +31,31 @@ async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
 
     if await is_premium(user_id):
+        plan, expires_at = await get_premium_info(user_id)
+        expiry_str = expires_at.strftime("%d.%m.%Y") if expires_at else "—"
         text = (
-            "⭐ У тебя уже есть полный доступ к курсу!\n\n"
+            f"⭐ У тебя есть доступ к курсу до {expiry_str}.\n\n"
             "Команды:\n"
             "/day — текущий урок\n"
             "/next — следующий день\n"
-            "/progress — прогресс"
+            "/progress — прогресс\n\n"
+            "Хочешь продлить заранее?"
         )
+        keyboard = [
+            [InlineKeyboardButton("📅 +Неделя — 100 ⭐", callback_data="buy_week")],
+            [InlineKeyboardButton("🎓 +Месяц — 200 ⭐", callback_data="buy_month")],
+            [InlineKeyboardButton("🗓 +Год — 1500 ⭐", callback_data="buy_year")],
+        ]
         try:
             if update.callback_query:
-                await update.callback_query.message.edit_text(text)
+                await update.callback_query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
             else:
-                await update.message.reply_text(text)
+                await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
         except:
             if update.callback_query:
-                await context.bot.send_message(chat_id=user_id, text=text)
+                await context.bot.send_message(chat_id=user_id, text=text, reply_markup=InlineKeyboardMarkup(keyboard))
             else:
-                await update.message.reply_text(text)
+                await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
         return
 
     keyboard = [
@@ -140,22 +148,27 @@ async def successful_payment(update: Update, context: ContextTypes.DEFAULT_TYPE)
     payment = update.message.successful_payment
 
     purchased_plan = None
-    for plan in PLANS.values():
+    plan_key = None
+    for key, plan in PLANS.items():
         if plan["payload"] == payment.invoice_payload:
             purchased_plan = plan
+            plan_key = key
             break
 
     plan_name = purchased_plan["title"] if purchased_plan else "Премиум"
 
-    await add_premium_user(user_id)
-    logger.info(f"💰 Новый премиум-пользователь: {user_id} ({user_name}), {plan_name}, {payment.total_amount} Stars")
+    new_expiry = await add_premium_user(user_id, plan=plan_key or "month")
+    logger.info(f"💰 Новый премиум-пользователь: {user_id} ({user_name}), {plan_name}, {payment.total_amount} Stars, до {new_expiry}")
 
     from ai_tutor import get_onboarding_text
     onboarding = get_onboarding_text(1)
 
+    expiry_str = new_expiry.split(" ")[0] if new_expiry else "—"
+
     await update.message.reply_text(
         f"🎉 Оплата прошла успешно, {user_name}!\n\n"
-        f"📦 Ты купил: {plan_name}\n\n"
+        f"📦 Ты купил: {plan_name}\n"
+        f"📅 Доступ действует до: {expiry_str}\n\n"
         f"{onboarding}\n\n"
         "Доступные команды:\n"
         "/day — текущий урок\n"
