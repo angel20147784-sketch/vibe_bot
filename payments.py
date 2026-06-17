@@ -38,10 +38,16 @@ async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "/next — следующий день\n"
             "/progress — прогресс"
         )
-        if update.callback_query:
-            await update.callback_query.message.edit_text(text)
-        else:
-            await update.message.reply_text(text)
+        try:
+            if update.callback_query:
+                await update.callback_query.message.edit_text(text)
+            else:
+                await update.message.reply_text(text)
+        except:
+            if update.callback_query:
+                await context.bot.send_message(chat_id=user_id, text=text)
+            else:
+                await update.message.reply_text(text)
         return
 
     keyboard = [
@@ -67,16 +73,29 @@ async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Выбери подписку:"
     )
 
-    if update.callback_query:
-        await update.callback_query.message.edit_text(
-            text,
-            reply_markup=InlineKeyboardMarkup(keyboard),
-        )
-    else:
-        await update.message.reply_text(
-            text,
-            reply_markup=InlineKeyboardMarkup(keyboard),
-        )
+    try:
+        if update.callback_query:
+            await update.callback_query.message.edit_text(
+                text,
+                reply_markup=InlineKeyboardMarkup(keyboard),
+            )
+        else:
+            await update.message.reply_text(
+                text,
+                reply_markup=InlineKeyboardMarkup(keyboard),
+            )
+    except:
+        if update.callback_query:
+            await context.bot.send_message(
+                chat_id=user_id,
+                text=text,
+                reply_markup=InlineKeyboardMarkup(keyboard),
+            )
+        else:
+            await update.message.reply_text(
+                text,
+                reply_markup=InlineKeyboardMarkup(keyboard),
+            )
 
 
 async def buy_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -88,15 +107,22 @@ async def buy_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not plan:
         return
 
-    await context.bot.send_invoice(
-        chat_id=query.message.chat.id,
-        title=f"Премиум: {plan['title']}",
-        description=plan["description"],
-        payload=plan["payload"],
-        provider_token="",
-        currency="XTR",
-        prices=[LabeledPrice(plan["title"], plan["price"])],
-    )
+    try:
+        await context.bot.send_invoice(
+            chat_id=query.message.chat.id,
+            title=f"Премиум: {plan['title']}",
+            description=plan["description"],
+            payload=plan["payload"],
+            provider_token="",
+            currency="XTR",
+            prices=[LabeledPrice(plan["title"], plan["price"])],
+        )
+    except Exception as e:
+        logger.error(f"Invoice error: {e}")
+        await context.bot.send_message(
+            chat_id=query.message.chat.id,
+            text="❌ Ошибка при создании оплаты. Попробуй ещё раз."
+        )
 
 
 async def pre_checkout(update: Update, context: ContextTypes.DEFAULT_TYPE):
