@@ -511,8 +511,10 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = [
             [InlineKeyboardButton("📊 Статистика", callback_data="admin_stats")],
             [InlineKeyboardButton("👥 База пользователей", callback_data="admin_users")],
+            [InlineKeyboardButton("📢 Рассылка", callback_data="admin_broadcast")],
             [InlineKeyboardButton("📝 Опубликовать пост", callback_data="admin_post")],
             [InlineKeyboardButton("📋 Все посты", callback_data="admin_all_posts")],
+            [InlineKeyboardButton("🧬 Эволюция промптов", callback_data="admin_evolve")],
             [InlineKeyboardButton("🚀 Growth Hacker", callback_data="admin_growth")],
             [InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound")],
             [InlineKeyboardButton("📝 Контент", callback_data="admin_content")],
@@ -566,6 +568,68 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(
             chat_id=user_id,
             text="📝 Отправь ID или @username пользователей:"
+        )
+    
+    elif data == "admin_broadcast":
+        if user_id not in ADMIN_IDS:
+            return
+        context.user_data["waiting_for_broadcast"] = True
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text="📢 РАССЫЛКА\n\n"
+                 "Отправь текст рассылки:\n\n"
+                 "Можно использовать:\n"
+                 "- Текст\n"
+                 "- Эмодзи\n"
+                 "- Ссылки\n\n"
+                 "После отправки покажу предпросмотр."
+        )
+    
+    elif data == "confirm_broadcast":
+        if user_id not in ADMIN_IDS:
+            return
+        broadcast_text = context.user_data.get("broadcast_text")
+        if not broadcast_text:
+            await query.message.delete()
+            await context.bot.send_message(chat_id=user_id, text="❌ Текст не найден")
+            return
+        
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="📢 Отправляю рассылку...")
+        
+        import asyncio
+        from db import get_all_subscribers
+        
+        subscribers = await get_all_subscribers()
+        sent = 0
+        failed = 0
+        
+        for uid in subscribers:
+            try:
+                await context.bot.send_message(chat_id=uid, text=broadcast_text)
+                sent += 1
+                await asyncio.sleep(0.1)
+            except Exception as e:
+                failed += 1
+        
+        context.user_data["broadcast_text"] = None
+        await context.bot.send_message(
+            chat_id=user_id,
+            text=f"✅ Рассылка завершена!\n\n"
+                 f"Отправлено: {sent}\n"
+                 f"Ошибок: {failed}"
+        )
+    
+    elif data == "edit_broadcast":
+        if user_id not in ADMIN_IDS:
+            return
+        context.user_data["waiting_for_broadcast"] = True
+        context.user_data["editing_broadcast"] = True
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text="✏️ Отправь новый текст рассылки:"
         )
     
     elif data == "admin_evolve":
@@ -1097,6 +1161,7 @@ async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton("📊 Статистика", callback_data="admin_stats")],
         [InlineKeyboardButton("👥 База пользователей", callback_data="admin_users")],
+        [InlineKeyboardButton("📢 Рассылка", callback_data="admin_broadcast")],
         [InlineKeyboardButton("📝 Опубликовать пост", callback_data="admin_post")],
         [InlineKeyboardButton("📋 Все посты", callback_data="admin_all_posts")],
         [InlineKeyboardButton("🧬 Эволюция промптов", callback_data="admin_evolve")],
@@ -1301,6 +1366,25 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             response += "\nПопроси их написать /start боту — ID добавится автоматически."
         
         await update.message.reply_text(response)
+        return
+
+    # Проверяем, не текст ли рассылки
+    if user_id in ADMIN_IDS and context.user_data.get("waiting_for_broadcast"):
+        context.user_data["waiting_for_broadcast"] = False
+        context.user_data["broadcast_text"] = text
+        
+        keyboard = [
+            [InlineKeyboardButton("✅ Отправить", callback_data="confirm_broadcast")],
+            [InlineKeyboardButton("✏️ Редактировать", callback_data="edit_broadcast")],
+            [InlineKeyboardButton("❌ Отмена", callback_data="admin_back")],
+        ]
+        
+        await update.message.reply_text(
+            f"📢 ПРЕДПРОСМОТР РАССЫЛКИ:\n\n"
+            f"{text}\n\n"
+            f"Отправить всем подписчикам?",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
         return
 
     # Проверяем, не редактируется ли пост
