@@ -21,6 +21,16 @@ import os
 ADMIN_IDS = [6928796982, 8639540904]
 PREMIUM_IDS = [8639540904]
 
+
+def get_day_keyboard(day_num):
+    keyboard = []
+    if day_num > 1:
+        keyboard.append([InlineKeyboardButton("⬅️ Предыдущий день", callback_data=f"day_{day_num - 1}")])
+    if day_num < 30:
+        keyboard.append([InlineKeyboardButton("➡️ Следующий день", callback_data=f"day_{day_num + 1}")])
+    keyboard.append([InlineKeyboardButton("🏠 Меню", callback_data="menu")])
+    return InlineKeyboardMarkup(keyboard)
+
 load_dotenv()
 
 logging.basicConfig(
@@ -108,10 +118,42 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await context.bot.send_photo(
                     chat_id=user_id,
                     photo=photo,
-                    caption=text
+                    caption=text,
+                    reply_markup=get_day_keyboard(day_num)
                 )
         else:
-            await context.bot.send_message(chat_id=user_id, text=text)
+            await context.bot.send_message(chat_id=user_id, text=text, reply_markup=get_day_keyboard(day_num))
+    
+    elif data.startswith("day_"):
+        try:
+            day_num = int(data.split("_")[1])
+        except ValueError:
+            return
+        if day_num < 1 or day_num > 30:
+            return
+        if day_num > 1 and not await is_premium(user_id):
+            await query.message.delete()
+            await context.bot.send_message(
+                chat_id=user_id,
+                text="🔒 Доступ к курсу ограничен\n\n"
+                     "День 1 — бесплатный. Чтобы открыть остальные 29 дней, купи подписку:\n\n"
+                     "⭐ 30-дневный курс — 200 Stars"
+            )
+            return
+        await set_course_day(user_id, day_num)
+        img_path = os.path.join("images", f"day_{day_num}.png")
+        text = format_day(day_num)
+        await query.message.delete()
+        if os.path.exists(img_path):
+            with open(img_path, "rb") as photo:
+                await context.bot.send_photo(
+                    chat_id=user_id,
+                    photo=photo,
+                    caption=text,
+                    reply_markup=get_day_keyboard(day_num)
+                )
+        else:
+            await context.bot.send_message(chat_id=user_id, text=text, reply_markup=get_day_keyboard(day_num))
     
     elif data == "next":
         current = await get_course_day(user_id)
@@ -135,10 +177,11 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await context.bot.send_photo(
                     chat_id=user_id,
                     photo=photo,
-                    caption=text
+                    caption=text,
+                    reply_markup=get_day_keyboard(new_day)
                 )
         else:
-            await context.bot.send_message(chat_id=user_id, text=text)
+            await context.bot.send_message(chat_id=user_id, text=text, reply_markup=get_day_keyboard(new_day))
     
     elif data == "progress":
         day = await get_course_day(user_id)
@@ -262,9 +305,9 @@ async def get_day(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     if os.path.exists(img_path):
         with open(img_path, "rb") as photo:
-            await update.message.reply_photo(photo=photo, caption=text)
+            await update.message.reply_photo(photo=photo, caption=text, reply_markup=get_day_keyboard(day_num))
     else:
-        await update.message.reply_text(text)
+        await update.message.reply_text(text, reply_markup=get_day_keyboard(day_num))
 
 
 async def next_day(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -290,9 +333,9 @@ async def next_day(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     if os.path.exists(img_path):
         with open(img_path, "rb") as photo:
-            await update.message.reply_photo(photo=photo, caption=text)
+            await update.message.reply_photo(photo=photo, caption=text, reply_markup=get_day_keyboard(new_day))
     else:
-        await update.message.reply_text(text)
+        await update.message.reply_text(text, reply_markup=get_day_keyboard(new_day))
 
 
 async def progress(update: Update, context: ContextTypes.DEFAULT_TYPE):
