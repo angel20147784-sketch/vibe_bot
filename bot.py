@@ -16,6 +16,7 @@ from ai_tutor import ask_tutor, get_onboarding_text
 from subscriber_agent import analyze_audience, find_similar_channels, create_promo_texts, growth_strategy
 from active_agent import daily_growth_task, generate_promo_post, find合作_opportunities, comment_on_posts
 from agency_agents import run_growth_hacker, run_outbound_strategist, run_content_creator, run_sales_coach
+from self_evolving_agent import run_evolution, EVOLVING_PROMPTS
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -450,6 +451,17 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat_id=user_id,
             text="📝 Отправь ID или @username пользователей:"
         )
+    
+    elif data == "admin_evolve":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="🧬 Запускаю эволюцию...\n\n1-2 минуты...")
+        results = await run_evolution(iterations=3)
+        text = "🧬 ЭВОЛЮЦИЯ ЗАВЕРШЕНА!\n\n"
+        for content_type, result in results.items():
+            text += f"📝 {content_type}: {result['best_score']:.2f}\n"
+        await context.bot.send_message(chat_id=user_id, text=text)
 
 
 async def manual_post(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -869,6 +881,46 @@ async def list_users_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(text)
 
 
+async def evolve_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    await update.message.reply_text("🧬 Запускаю эволюцию промптов...\n\nЭто займёт 1-2 минуты...")
+    
+    results = await run_evolution(iterations=3)
+    
+    text = "🧬 ЭВОЛЮЦИЯ ЗАВЕРШЕНА!\n\n"
+    for content_type, result in results.items():
+        text += f"📝 {content_type}:\n"
+        text += f"   Лучший счёт: {result['best_score']:.2f}\n"
+        text += f"   История: {result['scores']}\n\n"
+    
+    text += "Промпты автоматически улучшены!"
+    
+    await update.message.reply_text(text)
+
+
+async def prompts_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_private_chat(update):
+        return
+    user_id = update.effective_user.id
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Нет доступа.")
+        return
+
+    text = "🧬 ТЕКУЩИЕ ПРОМПТЫ:\n\n"
+    for content_type, config in EVOLVING_PROMPTS.items():
+        text += f"📝 {content_type}:\n"
+        text += f"   Текущий счёт: {config['scores'][-1] if config['scores'] else 0:.2f}\n"
+        text += f"   Промпт: {config['current'][:100]}...\n\n"
+    
+    await update.message.reply_text(text)
+
+
 async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_private_chat(update):
         return
@@ -882,6 +934,7 @@ async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("👥 База пользователей", callback_data="admin_users")],
         [InlineKeyboardButton("📝 Опубликовать пост", callback_data="admin_post")],
         [InlineKeyboardButton("📋 Все посты", callback_data="admin_all_posts")],
+        [InlineKeyboardButton("🧬 Эволюция промптов", callback_data="admin_evolve")],
         [InlineKeyboardButton("🚀 Growth Hacker", callback_data="admin_growth")],
         [InlineKeyboardButton("🎯 Outbound", callback_data="admin_outbound")],
         [InlineKeyboardButton("📝 Контент", callback_data="admin_content")],
@@ -1230,6 +1283,8 @@ def main():
     app.add_handler(CommandHandler("finduser", find_user_cmd))
     app.add_handler(CommandHandler("listusers", list_users_cmd))
     app.add_handler(CommandHandler("admin", admin_menu))
+    app.add_handler(CommandHandler("evolve", evolve_cmd))
+    app.add_handler(CommandHandler("prompts", prompts_cmd))
     app.add_handler(CallbackQueryHandler(button_callback))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     register_payment_handlers(app)
