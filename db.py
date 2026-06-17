@@ -36,6 +36,14 @@ async def init_db():
                 status TEXT DEFAULT 'published'
             )
         """)
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS referrals (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                referrer_id INTEGER,
+                referred_id INTEGER,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
         await db.commit()
     logger.info("✅ База данных инициализирована")
 
@@ -150,3 +158,29 @@ async def delete_post(post_id: int):
     async with aiosqlite.connect(DB_PATH) as db:
         await db.execute("DELETE FROM posts WHERE id = ?", (post_id,))
         await db.commit()
+
+
+async def add_referral(referrer_id: int, referred_id: int):
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute(
+            "INSERT INTO referrals (referrer_id, referred_id) VALUES (?, ?)",
+            (referrer_id, referred_id)
+        )
+        await db.commit()
+
+
+async def get_referral_count(user_id: int) -> int:
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute(
+            "SELECT COUNT(*) FROM referrals WHERE referrer_id = ?",
+            (user_id,)
+        )
+        result = await cursor.fetchone()
+        return result[0] if result else 0
+
+
+async def get_total_referrals() -> int:
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute("SELECT COUNT(*) FROM referrals")
+        result = await cursor.fetchone()
+        return result[0] if result else 0

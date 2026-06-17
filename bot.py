@@ -9,7 +9,7 @@ from apscheduler.triggers.cron import CronTrigger
 from content_generator import generate_post
 from scheduler_config import SCHEDULE
 from payments import register_payment_handlers
-from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day, add_premium_user, add_post, get_all_posts, get_post, update_post, delete_post
+from db import init_db, add_subscriber, remove_subscriber, get_all_subscribers, is_premium, get_course_day, set_course_day, next_course_day, add_premium_user, add_post, get_all_posts, get_post, update_post, delete_post, add_referral, get_referral_count, get_total_referrals
 from course_data import format_day, COURSE_DAYS
 from ai_agent import scheduled_autonomous_job
 from ai_tutor import ask_tutor, get_onboarding_text
@@ -65,10 +65,19 @@ CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
+    username = update.effective_user.username or "user"
     await add_subscriber(user_id)
     
     premium = await is_premium(user_id)
     status = "⭐ Полный доступ" if premium else "🔓 Бесплатный пробный"
+    
+    # Проверяем реферала
+    referrer = context.args[0] if context.args else None
+    if referrer and referrer.isdigit():
+        referrer_id = int(referrer)
+        if referrer_id != user_id:
+            await add_referral(referrer_id, user_id)
+            logger.info(f"Referral: {referrer_id} invited {user_id}")
     
     keyboard = [
         [InlineKeyboardButton("📚 Текущий урок", callback_data="day")],
@@ -76,6 +85,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("📊 Мой прогресс", callback_data="progress")],
         [InlineKeyboardButton("📝 Пост от ИИ", callback_data="post")],
         [InlineKeyboardButton("🎓 Купить курс", callback_data="buy")],
+        [InlineKeyboardButton("📢 Поделиться с другом", callback_data="share")],
         [InlineKeyboardButton("❓ Помощь", callback_data="help")],
     ]
     
@@ -275,6 +285,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("📊 Мой прогресс", callback_data="progress")],
             [InlineKeyboardButton("📝 Пост от ИИ", callback_data="post")],
             [InlineKeyboardButton("🎓 Купить курс", callback_data="buy")],
+            [InlineKeyboardButton("📢 Поделиться с другом", callback_data="share")],
             [InlineKeyboardButton("❓ Помощь", callback_data="help")],
         ]
         await query.message.delete()
@@ -282,6 +293,25 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat_id=user_id,
             text="Выбери действие:",
             reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+    
+    elif data == "share":
+        bot_username = (await context.bot.get_me()).username
+        share_link = f"https://t.me/{bot_username}?start={user_id}"
+        share_text = (
+            "📢 ПОДЕЛИСЬ С ДРУГОМ!\n\n"
+            "Отправь эту ссылку другу:\n\n"
+            f"{share_link}\n\n"
+            "Когда друг перейдёт по ссылке и напишет /start — он автоматически подпишется!"
+        )
+        await query.message.delete()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text=share_text,
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("📤 Отправить другу", url=f"https://t.me/share/url?url={share_link}&text=🎓 Бесплатный курс по вайбкодингу! 30 дней обучения с ИИ.")],
+                [InlineKeyboardButton("◀️ Назад", callback_data="menu")],
+            ])
         )
     
     # Админ-кнопки
@@ -292,6 +322,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         db = sqlite3.connect("vibe_bot.db")
         subs = db.execute("SELECT COUNT(*) FROM subscribers").fetchone()[0]
         premium = db.execute("SELECT COUNT(*) FROM premium_users").fetchone()[0]
+        referrals = db.execute("SELECT COUNT(*) FROM referrals").fetchone()[0]
         db.close()
         await query.message.delete()
         await context.bot.send_message(
@@ -299,6 +330,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text=f"📊 СТАТИСТИКА\n\n"
                  f"👥 Подписчики: {subs}\n"
                  f"⭐ Премиум: {premium}\n"
+                 f"📢 Рефералы: {referrals}\n"
                  f"📈 Конверсия: {premium/subs*100 if subs else 0:.1f}%"
         )
     
