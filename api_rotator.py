@@ -6,6 +6,7 @@ import os
 import asyncio
 import logging
 import time
+import requests
 from openai import AsyncOpenAI
 
 logger = logging.getLogger(__name__)
@@ -20,6 +21,7 @@ PROVIDERS = [
         "priority": 1,
         "last_error": 0,
         "error_count": 0,
+        "cooldown_until": 0,
     },
     {
         "name": "OpenRouter-2",
@@ -29,6 +31,7 @@ PROVIDERS = [
         "priority": 2,
         "last_error": 0,
         "error_count": 0,
+        "cooldown_until": 0,
     },
     {
         "name": "OpenRouter-3",
@@ -38,11 +41,11 @@ PROVIDERS = [
         "priority": 3,
         "last_error": 0,
         "error_count": 0,
+        "cooldown_until": 0,
     },
 ]
 
 # Состояние
-_current_provider_index = 0
 _clients = {}
 
 
@@ -51,39 +54,41 @@ def get_available_providers():
     return [p for p in PROVIDERS if p.get("api_key")]
 
 
-def get_client(provider=None):
+def get_client(provider):
     """Получает клиент для провайдера"""
-    if provider is None:
-        provider = get_current_provider()
-    
     name = provider["name"]
     if name not in _clients or _clients[name] is None:
         _clients[name] = AsyncOpenAI(
             api_key=provider["api_key"],
             base_url=provider["base_url"],
-            timeout=60.0,
+            timeout=15.0,  # Уменьшили таймаут
         )
     return _clients[name]
 
 
-def get_current_provider():
-    """Получает текущий рабочий провайдер"""
+def get_available_sorted():
+    """Возвращает провайдеры, отсортированные по приоритету и ошибкам"""
     available = get_available_providers()
-    if not available:
-        return None
+    now = time.time()
     
-    # Сортируем по приоритету и количеству ошибок
-    sorted_providers = sorted(available, key=lambda p: (p["error_count"], p["priority"]))
-    return sorted_providers[0]
+    # Фильтруем те, что не в кулдауне
+    ready = [p for p in available if p.get("cooldown_until", 0) < now]
+    
+    if not ready:
+        # Все в кулдауне - берём с наименьшим кулдауном
+        ready = sorted(available, key=lambda p: p.get("cooldown_until", 0))[:1]
+    
+    return sorted(ready, key=lambda p: (p["error_count"], p["priority"]))
 
 
-def mark_provider_error(provider_name):
-    """Отмечает ошибку провайдера"""
+def mark_provider_error(provider_name, cooldown=60):
+    """Отмечает ошибку провайдера с кулдауном"""
     for p in PROVIDERS:
         if p["name"] == provider_name:
             p["last_error"] = time.time()
             p["error_count"] += 1
-            logger.warning(f"⚠️ Provider {provider_name} error count: {p['error_count']}")
+            p["cooldown_until"] = time.time() + cooldown
+            logger.warning(f"⚠️ Provider {provider_name} error, cooldown {cooldown}s")
             break
 
 
@@ -91,86 +96,74 @@ def reset_provider(provider_name):
     """Сбрасывает ошибки провайдера"""
     for p in PROVIDERS:
         if p["name"] == provider_name:
-            p["error_count"] = 0
-            p["last_error"] = 0
-            logger.info(f"✅ Provider {provider_name} reset")
+            p["error_count"] = max(0, p["error_count"] - 1)
+            p["cooldown_until"] = 0
             break
 
 
 def get_provider_status():
     """Возвращает статус всех провайдеров"""
+    now = time.time()
     status = []
     for p in PROVIDERS:
+        in_cooldown = p.get("cooldown_until", 0) > now
         status.append({
             "name": p["name"],
             "available": bool(p.get("api_key")),
             "errors": p["error_count"],
-            "active": p["name"] == get_current_provider()["name"] if get_current_provider() else False,
+            "in_cooldown": in_cooldown,
+            "cooldown_left": max(0, int(p.get("cooldown_until", 0) - now)),
         })
     return status
 
 
-async def generate_with_rotation(prompt: str, max_tokens: int = 512) -> tuple:
-    """Генерирует контент с автоматическим переключением провайдеров"""
-    available = get_available_providers()
+def generate_sync(prompt: str, max_tokens: int = 512) -> tuple:
+    """Синхронная генерация через requests (быстрее при ошибках)"""
+    available = get_available_sorted()
     
-    if not available:
-        return None, "No providers available"
-    
-    # Сортируем по приоритету и ошибкам
-    sorted_providers = sorted(available, key=lambda p: (p["error_count"], p["priority"]))
-    
-    for provider in sorted_providers:
+    for provider in available:
         try:
-            client = get_client(provider)
-            response = await client.chat.completions.create(
-                model=provider["model"],
-                messages=[
-                    {"role": "system", "content": prompt},
-                    {"role": "user", "content": "Создай контент для Telegram-канала."},
-                ],
-                max_tokens=max_tokens,
+            r = requests.post(
+                f"{provider['base_url']}/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {provider['api_key']}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": provider["model"],
+                    "messages": [
+                        {"role": "system", "content": prompt},
+                        {"role": "user", "content": "Создай контент."},
+                    ],
+                    "max_tokens": max_tokens,
+                },
+                timeout=15,
             )
-            reset_provider(provider["name"])
-            return response.choices[0].message.content, provider["name"]
             
-        except Exception as e:
-            error_str = str(e)
-            if "429" in error_str or "rate" in error_str.lower():
-                mark_provider_error(provider["name"])
-                logger.warning(f"⚠️ Rate limited on {provider['name']}, trying next...")
+            if r.status_code == 200:
+                reset_provider(provider["name"])
+                return r.json()["choices"][0]["message"]["content"], provider["name"]
+            
+            elif r.status_code == 429:
+                mark_provider_error(provider["name"], cooldown=120)
+                logger.warning(f"⚠️ 429 on {provider['name']}")
                 continue
+            
             else:
-                logger.error(f"❌ Error on {provider['name']}: {e}")
+                logger.error(f"❌ {provider['name']}: {r.status_code}")
+                mark_provider_error(provider["name"], cooldown=30)
                 continue
+                
+        except Exception as e:
+            logger.error(f"❌ {provider['name']}: {e}")
+            mark_provider_error(provider["name"], cooldown=30)
+            continue
     
     return None, "All providers failed"
 
 
-async def test_providers():
-    """Тестирует всех провайдеров"""
-    print("🔍 Тестирование провайдеров...\n")
-    
-    for provider in get_available_providers():
-        try:
-            client = get_client(provider)
-            response = await client.chat.completions.create(
-                model=provider["model"],
-                messages=[
-                    {"role": "user", "content": "Скажи 'OK'"}
-                ],
-                max_tokens=10,
-            )
-            print(f"✅ {provider['name']}: работает")
-            reset_provider(provider["name"])
-        except Exception as e:
-            error_str = str(e)
-            if "429" in error_str:
-                mark_provider_error(provider["name"])
-                print(f"⚠️ {provider['name']}: rate limited")
-            else:
-                print(f"❌ {provider['name']}: {str(e)[:50]}")
-
-
-if __name__ == "__main__":
-    asyncio.run(test_providers())
+async def generate_with_rotation(prompt: str, max_tokens: int = 512) -> tuple:
+    """Генерирует контент с автоматическим переключением провайдеров"""
+    # Используем синхронную версию через requests (надёжнее)
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(None, lambda: generate_sync(prompt, max_tokens))
