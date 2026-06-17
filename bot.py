@@ -159,13 +159,35 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         current = await get_course_day(user_id)
         if current >= 30:
             await query.message.delete()
-            await context.bot.send_message(chat_id=user_id, text="🎉 Ты уже прошёл весь курс!")
+            keyboard = [
+                [InlineKeyboardButton("🔄 Начать заново", callback_data="day_1")],
+                [InlineKeyboardButton("🎓 Купить курс", callback_data="buy")],
+                [InlineKeyboardButton("🏠 Меню", callback_data="menu")],
+            ]
+            await context.bot.send_message(
+                chat_id=user_id,
+                text="🎉 Ты прошёл все 30 дней курса!\n\n"
+                     "Теперь ты знаешь:\n"
+                     "📝 Промпт-инжиниринг\n"
+                     "🛠 Cursor, Claude, v0.dev\n"
+                     "📦 Реальные проекты\n"
+                     "🚀 Деплой и монетизация\n\n"
+                     "Начни зарабатывать на своих навыках!",
+                reply_markup=InlineKeyboardMarkup(keyboard)
+            )
             return
         if current >= 1 and not await is_premium(user_id):
             await query.message.delete()
+            keyboard = [
+                [InlineKeyboardButton("🎓 Купить курс — 200 ⭐", callback_data="buy")],
+                [InlineKeyboardButton("🏠 Меню", callback_data="menu")],
+            ]
             await context.bot.send_message(
                 chat_id=user_id,
-                text="🔒 Следующий день доступен по подписке\n\n⭐ /buy — купить доступ"
+                text="🔒 Следующий день доступен по подписке\n\n"
+                     "Текущий день: бесплатный пробный\n"
+                     "Купить полный доступ — 200 ⭐",
+                reply_markup=InlineKeyboardMarkup(keyboard)
             )
             return
         new_day = await next_course_day(user_id)
