@@ -19,6 +19,7 @@ from active_agent import daily_growth_task, generate_promo_post, find合作_oppo
 from agency_agents import run_growth_hacker, run_outbound_strategist, run_content_creator, run_sales_coach
 from self_evolving_agent import run_evolution, EVOLVING_PROMPTS
 from onec_agent import ask_1c, get_skills_list, get_skill_info, SKILLS_INFO
+from autopublish import publish_next_post, get_publish_stats
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -661,12 +662,37 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if user_id not in ADMIN_IDS:
             return
         await query.message.delete()
-        await context.bot.send_message(chat_id=user_id, text="🧬 Запускаю эволюцию...\n\n1-2 минуты...")
+        await context.bot.send_message(chat_id=user_id, text="🧬 Запускаю эволюцию...")
         results = await run_evolution(iterations=3)
         text = "🧬 ЭВОЛЮЦИЯ ЗАВЕРШЕНА!\n\n"
         for content_type, result in results.items():
             text += f"📝 {content_type}: {result['best_score']:.2f}\n"
         await context.bot.send_message(chat_id=user_id, text=text)
+
+    elif data == "admin_publish_next":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="📝 Публикую следующий пост...")
+        success = await publish_next_post()
+        if success:
+            await context.bot.send_message(chat_id=user_id, text="✅ Пост опубликован!")
+        else:
+            await context.bot.send_message(chat_id=user_id, text="❌ Ошибка или все посты опубликованы")
+
+    elif data == "admin_publish_stats":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        stats = get_publish_stats()
+        await context.bot.send_message(
+            chat_id=user_id,
+            text=f"📊 СТАТИСТИКА АВТОПУБЛИКАЦИИ\n\n"
+                 f"📝 Всего постов: {stats['total']}\n"
+                 f"✅ Опубликовано: {stats['published']}\n"
+                 f"⏳ Осталось: {stats['remaining']}\n"
+                 f"⏰ Интервал: каждый час"
+        )
 
 
 async def manual_post(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1207,6 +1233,10 @@ async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
             InlineKeyboardButton("💼 Продажи", callback_data="admin_sales"),
             InlineKeyboardButton("➕ Юзеры", callback_data="admin_add"),
         ],
+        [
+            InlineKeyboardButton("📤 Следующий пост", callback_data="admin_publish_next"),
+            InlineKeyboardButton("📊 Автопубликация", callback_data="admin_publish_stats"),
+        ],
     ]
 
     await update.message.reply_text(
@@ -1542,6 +1572,13 @@ async def post_init(application: Application):
             id=job["id"],
         )
         logger.info(f"📅 Задача {job['id']} запланирована на {job['hour']}:{job['minute']:02d}")
+
+    scheduler.add_job(
+        publish_next_post,
+        CronTrigger(hour="*/1"),
+        id="autopublish",
+    )
+    logger.info("📅 Автопубликация запланирована каждый час")
 
     register_renewal_job(scheduler, application)
 
