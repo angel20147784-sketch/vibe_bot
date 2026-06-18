@@ -21,6 +21,7 @@ from self_evolving_agent import run_evolution, EVOLVING_PROMPTS
 from onec_agent import ask_1c, get_skills_list, get_skill_info, SKILLS_INFO
 from autopublish import publish_next_post, get_publish_stats
 from research_agent import run_research_cycle
+from autonomous_agent import run_autonomous_cycle
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -1599,6 +1600,13 @@ async def post_init(application: Application):
         id="research_agent",
     )
     logger.info("📅 Исследовательский агент запланирован каждые 6 часов")
+
+    scheduler.add_job(
+        run_autonomous_cycle,
+        CronTrigger(hour="*/2", minute=random.randint(0, 59)),
+        id="autonomous_agent",
+    )
+    logger.info("📅 Автономный агент запланирован каждые 2 часа")
 
     register_renewal_job(scheduler, application)
 
