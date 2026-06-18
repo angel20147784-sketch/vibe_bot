@@ -20,6 +20,7 @@ from agency_agents import run_growth_hacker, run_outbound_strategist, run_conten
 from self_evolving_agent import run_evolution, EVOLVING_PROMPTS
 from onec_agent import ask_1c, get_skills_list, get_skill_info, SKILLS_INFO
 from autopublish import publish_next_post, get_publish_stats
+from research_agent import run_research_cycle
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -694,6 +695,17 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                  f"⏰ Интервал: каждый час"
         )
 
+    elif data == "admin_research":
+        if user_id not in ADMIN_IDS:
+            return
+        await query.message.delete()
+        await context.bot.send_message(chat_id=user_id, text="🔍 Запускаю поиск...")
+        try:
+            run_research_cycle()
+            await context.bot.send_message(chat_id=user_id, text="✅ Поиск завершён, посты опубликованы!")
+        except Exception as e:
+            await context.bot.send_message(chat_id=user_id, text=f"❌ Ошибка: {e}")
+
 
 async def manual_post(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("⏳ Генерирую пост...")
@@ -1236,6 +1248,7 @@ async def admin_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [
             InlineKeyboardButton("📤 Следующий пост", callback_data="admin_publish_next"),
             InlineKeyboardButton("📊 Автопубликация", callback_data="admin_publish_stats"),
+            InlineKeyboardButton("🔍 Исследовать", callback_data="admin_research"),
         ],
     ]
 
@@ -1579,6 +1592,13 @@ async def post_init(application: Application):
         id="autopublish",
     )
     logger.info("📅 Автопубликация запланирована каждый час")
+
+    scheduler.add_job(
+        run_research_cycle,
+        CronTrigger(hour="*/6"),
+        id="research_agent",
+    )
+    logger.info("📅 Исследовательский агент запланирован каждые 6 часов")
 
     register_renewal_job(scheduler, application)
 
