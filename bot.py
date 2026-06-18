@@ -23,6 +23,7 @@ from autopublish import publish_next_post, get_publish_stats
 from research_agent import run_research_cycle
 from autonomous_agent import run_autonomous_cycle
 from growth_agent import run_growth_cycle
+from image_agent import run_image_cycle
 import os
 
 ADMIN_IDS = [6928796982, 8639540904]
@@ -1615,6 +1616,14 @@ async def post_init(application: Application):
         id="growth_agent",
     )
     logger.info("📅 Growth-агент запланирован каждые 3 часа")
+
+    for hour in [8, 14, 20]:
+        scheduler.add_job(
+            run_image_cycle,
+            CronTrigger(hour=hour, minute=0),
+            id=f"image_agent_{hour}",
+        )
+        logger.info(f"📅 Image-агент запланирован на {hour}:00")
 
     register_renewal_job(scheduler, application)
 
