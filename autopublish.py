@@ -5,7 +5,7 @@
 import os
 import json
 import logging
-from urllib.request import urlopen, Request
+import asyncio
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -64,8 +64,10 @@ def save_state(state):
         json.dump(state, f)
 
 
-def post_to_telegram(text):
-    data = json.dumps({
+async def post_to_telegram(text):
+    import httpx
+
+    payload = {
         "chat_id": CHANNEL_ID,
         "text": text,
         "reply_markup": {
@@ -73,18 +75,16 @@ def post_to_telegram(text):
                 [{"text": "🚀 Начать", "url": "https://t.me/CODEScodingbot?start=course"}]
             ]
         }
-    }).encode("utf-8")
+    }
 
     try:
-        req = Request(
-            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            data=data,
-            headers={"Content-Type": "application/json"},
-            method="POST"
-        )
-        resp = urlopen(req, timeout=30)
-        result = json.loads(resp.read().decode("utf-8"))
-        return result.get("ok", False)
+        async with httpx.AsyncClient(timeout=30) as client:
+            resp = await client.post(
+                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                json=payload,
+            )
+            result = resp.json()
+            return result.get("ok", False)
     except Exception as e:
         logger.error(f"Ошибка публикации: {e}")
         return False

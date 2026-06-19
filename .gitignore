@@ -3,3 +3,14 @@ __pycache__/
 *.pyc
 .DS_Store
 railway.env
+*.log
+*_state.json
+autonomous_agent_state.json
+growth_agent_state.json
+image_agent_state.json
+research_agent_state.json
+publish_state.json
+publish_posts.py
+start.bat
+start_publisher.bat
+traffic_boost_content.md
