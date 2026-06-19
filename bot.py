@@ -1692,8 +1692,19 @@ def main():
     app.add_error_handler(error_handler)
 
     logger.info("🤖 Бот запущен!")
-    app.run_polling(allowed_updates=Update.ALL_TYPES)
+    app.run_polling(
+        allowed_updates=Update.ALL_TYPES,
+        drop_pending_updates=True,
+        poll_interval=2.0,
+        timeout=30,
+    )
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except Exception as e:
+            logger.error(f"Критическая ошибка: {e}. Перезапуск через 10 сек...")
+            import time
+            time.sleep(10)
